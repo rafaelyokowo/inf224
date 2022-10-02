@@ -1,6 +1,6 @@
 # INF224 - Paradigmes de programmation, théorie et pratique
 
-## Les réponses aux questions presentées
+## Les réponses aux questions posées
 Pour ce faire créer dans main.cpp un tableau dont les éléments sont tantôt une photo tantôt une vidéo. Ecrire ensuite une boucle permettant d'afficher les attributs de tous les élements du tableau ou de les "jouer". Cette boucle doit traiter tous les objets dérivant de la classe de base de la même manière.
 
 - Quelle est la propriété caractéristique de l'orienté objet qui permet de faire cela ?
