@@ -12,10 +12,10 @@ private:
 
 public:
 	Video() : Media() {}
-	//~Video();
+	~Video();
 	void setDuree(int d);
 	int getDuree() const;
-	void jouer();
+	void jouer() override;
 	void afficher(std::ostream & s);
 };
 

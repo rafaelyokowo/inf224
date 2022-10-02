@@ -12,20 +12,22 @@ using namespace std;
 
 int main(int argc, const char* argv[])
 {
-	Video * objet =  new Video();
+	int size = 2;
+	Media * playlist[size];
+	playlist[0] = new Video();
+	playlist[1] = new Photo();
+	playlist[0]->setPath("/Users/rafaelyokowo/Desktop/Telecom/INF224/test.mp4");
+	playlist[1]->setPath("/Users/rafaelyokowo/Desktop/Telecom/INF224/logo.png");
 
-	objet->setPath("/Users/rafaelyokowo/Desktop/Telecom/INF224/test.mp4");
+	playlist[0]->jouer();
+	playlist[1]->jouer();
 
-	string pathname;
-	pathname = objet->getPath();
-	objet->jouer();
-	objet->setDuree(20);
-	objet->setType("video");
-	objet->afficher(std::cout);
+	for (int i=0; i < size; i++){
+		delete playlist[i];
+	}
 
-	delete objet;
 
-    std::cout << "Hello brave new world" << std::endl;
+    // std::cout << "Hello brave new world" << std::endl;
 
     return 0;
 }

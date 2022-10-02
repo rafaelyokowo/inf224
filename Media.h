@@ -17,7 +17,7 @@ public:
 	string getType() const;
 	void setPath(string p);
 	string getPath() const;
-	void jouer() const;
+	virtual void jouer();
 	void afficher(std::ostream & s) const;
 };
 #endif

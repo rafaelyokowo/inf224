@@ -18,7 +18,7 @@ public:
 	void setLongitude(int longi);
 	int getLatitude() const;
 	int getLongitude() const;
-	void jouer();
+	void jouer() override;
 	void afficher(std::ostream & s);
 };
 
@@ -40,7 +40,7 @@ int Photo::getLongitude() const{
 
 void Photo::jouer() {
 	string command;
-	command = "imagej" + getPath() +  "&";
+	command = "qlmanage -p " + getPath() +  "&";
 	system(command.data());
 }
 

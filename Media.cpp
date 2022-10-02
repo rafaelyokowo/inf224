@@ -23,6 +23,10 @@ string Media::getPath() const{
 	return path;
 }
 
+void Media::jouer() {
+	return;
+}
+
 void Media::afficher(std::ostream & s) const{
 	s << getType() << " "<< getPath() << std::endl;
 }
