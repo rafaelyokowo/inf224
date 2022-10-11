@@ -40,7 +40,7 @@ int Photo::getLongitude() const{
 
 void Photo::jouer() {
 	string command;
-	command = "qlmanage -p " + getPath() +  "&";
+	command = "imagej " + getPath() +  "&";
 	system(command.data());
 }
 
