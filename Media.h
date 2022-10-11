@@ -11,7 +11,7 @@ private:
 
 public:
 	Media() {};
-	~Media();
+	~Media() {};
 	Media(string t, string p);
 	void setType(string t);
 	string getType() const;

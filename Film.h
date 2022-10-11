@@ -13,7 +13,7 @@ private:
 
 public:
 	Film() : Video() {}
-    ~Film();
+    ~Film() {};
 	void setTableau(int * t);
 	const int * getTableau() const;
 	const int getTaille() const;

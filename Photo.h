@@ -13,7 +13,7 @@ private:
 
 public:
 	Photo() : Media() {}
-	~Photo();
+	~Photo() {};
 	void setLatitude(int lati);
 	void setLongitude(int longi);
 	int getLatitude() const;
