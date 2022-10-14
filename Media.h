@@ -11,8 +11,8 @@ private:
 
 public:
 	Media() {};
+	Media(string _type, string _path);
 	~Media() {};
-	Media(string t, string p);
 	void setType(string t);
 	string getType() const;
 	void setPath(string p);
@@ -20,4 +20,5 @@ public:
 	virtual void jouer();
 	void afficher(std::ostream & s) const;
 };
+
 #endif

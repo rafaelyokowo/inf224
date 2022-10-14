@@ -12,12 +12,17 @@ private:
 
 public:
 	Video() : Media() {}
+	Video(int _duree);
 	~Video() {};
 	void setDuree(int d);
 	int getDuree() const;
 	void jouer() override;
 	void afficher(std::ostream & s);
 };
+
+Video::Video(int _duree){
+	duree = _duree;
+}
 
 void Video::setDuree(int d) {
 	duree = d;

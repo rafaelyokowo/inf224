@@ -13,6 +13,7 @@ private:
 
 public:
 	Photo() : Media() {}
+	Photo(int _latitude, int _logitude);
 	~Photo() {};
 	void setLatitude(int lati);
 	void setLongitude(int longi);
@@ -21,6 +22,11 @@ public:
 	void jouer() override;
 	void afficher(std::ostream & s);
 };
+
+Photo::Photo(int _latitude, int _longitude){
+	latitude = _latitude;
+	longitude = _longitude;
+}
 
 void Photo::setLatitude(int lati) {
 	latitude = lati;
@@ -40,12 +46,13 @@ int Photo::getLongitude() const{
 
 void Photo::jouer() {
 	string command;
-	command = "imagej " + getPath() +  "&";
+	command = "qlmanage -p " + getPath() +  "&";
 	system(command.data());
 }
 
 void Photo::afficher(std::ostream & s){
-	s << getLatitude() << " " << getLongitude() << " " << getType() << " "<< getPath() << std::endl;
+	s << getLatitude() << " " << getLongitude() << " " << getType() 
+	<< " "<< getPath() << std::endl;
 }
 
 #endif
