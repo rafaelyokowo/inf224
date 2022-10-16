@@ -4,24 +4,27 @@
 #include <iostream>
 #include <string>
 #include "Media.h"
-using namespace std;
 
-class Video:public Media {
+class Video: public Media {
 private:
 	int duree = 0;
 
 public:
 	Video() : Media() {}
 	Video(int _duree);
-	~Video() {};
+	~Video();
 	void setDuree(int d);
 	int getDuree() const;
-	void jouer() override;
-	void afficher(std::ostream & s);
+	void play() override;
+	void show(std::ostream & s) override;
 };
 
 Video::Video(int _duree){
 	duree = _duree;
+}
+
+Video::~Video(){
+	std::cout << "Destruction d'objet Video" << std::endl;
 }
 
 void Video::setDuree(int d) {
@@ -32,13 +35,13 @@ int Video::getDuree() const{
 	return duree;
 }
 
-void Video::jouer() {
-	string command;
+void Video::play() {
+	std::string command;
 	command = "mpv " + getPath() +  "&";
 	system(command.data());
 }
 
-void Video::afficher(std::ostream & s){
+void Video::show(std::ostream & s){
 	s << getDuree() << " " << getType() << " "<< getPath() << std::endl;
 }
 

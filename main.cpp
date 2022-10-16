@@ -10,21 +10,37 @@
 #include "Film.h"
 #include "Playlist.h"
 
-using namespace std;
-
-string macPath = "/Users/rafaelyokowo/Desktop/Telecom/inf224/";
-string debianPath = "/cal/exterieurs/ryokowo-22/Desktop/inf224/";
+std::string macPath = "/Users/rafaelyokowo/Desktop/Telecom/inf224/";
+std::string debianPath = "/cal/exterieurs/ryokowo-22/Desktop/inf224/";
 
 int main(int argc, const char* argv[])
 {
-	string name = "memorias";
+	std::string name = "memorias";
+
 	Playlist * lista = new Playlist(name);
 
-	// list<Media *> lista1;
+	std::shared_ptr<Video> video = std::make_shared<Video>(10);
+	std::shared_ptr<Photo> photo = std::make_shared<Photo>(50000,50000);
 
-	// lista->push_back(make_shared<Video>(10));
-	// lista->push_back(make_shared<Photo>(50000,50000));
+	video->setPath(macPath + "test.mp4");
+	video->setType("video");
 
+	photo->setPath(macPath + "logo.png");
+	photo->setType("photo");
+
+	lista->push_back(video);
+	lista->push_back(photo);
+
+	lista->showList(*lista);
+
+	for (auto & it : *lista) {
+		it->play();
+		it.reset();
+	}
+
+	std::string teste = lista->getName();
+
+	std::cout << teste;
 
 	// int s = 4;
 	// int * tableau = new int[s]{10, 20, 30, 40};
@@ -58,8 +74,8 @@ int main(int argc, const char* argv[])
 
 	// playlist[1]->afficher(cout);
 
-	// //playlist[0]->jouer();
-	// //playlist[1]->jouer();
+	// //playlist[0]->play();
+	// //playlist[1]->play();
 
 	// for (int i=0; i < s; i++){
     //     delete playlist[i];

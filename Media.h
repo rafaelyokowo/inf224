@@ -2,23 +2,22 @@
 #define Media_h
 #include <iostream>
 #include <string>
-using namespace std;
 
 class Media {
 private:
-	string type{};
-	string path{};
+	std::string type{};
+	std::string path{};
 
 public:
 	Media() {};
-	Media(string _type, string _path);
+	Media(std::string _type, std::string _path);
 	~Media() {};
-	void setType(string t);
-	string getType() const;
-	void setPath(string p);
-	string getPath() const;
-	virtual void jouer();
-	void afficher(std::ostream & s) const;
+	void setType(std::string t);
+	std::string getType() const;
+	void setPath(std::string p);
+	std::string getPath() const;
+	virtual void play();
+	virtual void show(std::ostream & s);
 };
 
 #endif

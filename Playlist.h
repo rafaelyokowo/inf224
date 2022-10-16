@@ -5,32 +5,31 @@
 #include <string>
 #include <list>
 #include "Media.h"
-using namespace std;
 
-class Playlist: list<shared_ptr<Media>> {
+class Playlist: public std::list<std::shared_ptr<Media> > {
 private:
-    string groupName;
+    std::string groupName;
 
 public:
     Playlist();
-	Playlist(string _groupName);
+	Playlist(std::string _groupName);
     ~Playlist() {};
-	string getName() const;
-	void show(int t);
+	std::string getName() const;
+    template <typename T> void showList(const std::list<T> & l);
 };
 
-Playlist::Playlist(string _groupName){
+Playlist::Playlist(std::string _groupName){
     groupName = _groupName;
 }
 
-string Playlist::getName() const{
+std::string Playlist::getName() const{
 	return groupName;
 }
 
-void Playlist::show(int t){
-    for(int i = 0; i < t; i++){
-    }
-    cout << endl;
+template <typename T> void Playlist::showList(const std::list<T> & l) {
+    for (auto& it : l){
+        it->show(std::cout);
+    }     
 }
 
 #endif

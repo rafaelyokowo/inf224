@@ -5,9 +5,8 @@
 #include <algorithm>
 #include <string>
 #include "Video.h"
-using namespace std;
 
-class Film:public Video {
+class Film: public Video {
 private:
     int arraySize = 0;
 	int * durationArray = nullptr;
@@ -46,9 +45,9 @@ const int Film::getSize() const{
 
 void Film::show(int t){
     for(int i = 0; i < t; i++){
-        cout << durationArray[i] << " ";
+        std::cout << durationArray[i] << " ";
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 #endif
