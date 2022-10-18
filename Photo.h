@@ -1,9 +1,10 @@
 #ifndef Photo_h
 #define Photo_h
 
+#include "Media.h"
+
 #include <iostream>
 #include <string>
-#include "Media.h"
 
 class Photo: public Media {
 private:
@@ -49,13 +50,15 @@ int Photo::getLongitude() const{
 
 void Photo::play() {
 	std::string command;
-	command = "qlmanage -p " + getPath() +  "&";
+	command = "imagej " + getPath() +  "&";
 	system(command.data());
 }
 
 void Photo::show(std::ostream & s){
-	s << getLatitude() << " " << getLongitude() << " " << getType() 
-	<< " "<< getPath() << std::endl;
+	s << "Type: " << getType() << std::endl
+		<< "Path: "<< getPath() << std::endl
+		<< "Latitude: " << getLatitude() << std::endl
+		<< "Longitude: " << getLongitude() << std::endl;
 }
 
 #endif

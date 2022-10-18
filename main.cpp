@@ -2,13 +2,14 @@
 // main.cpp
 // Created on 21/10/2018
 //
-
-#include <iostream>
 #include "Media.h"
 #include "Video.h"
 #include "Photo.h"
 #include "Film.h"
 #include "Playlist.h"
+
+#include <iostream>
+#include <memory>
 
 std::string macPath = "/Users/rafaelyokowo/Desktop/Telecom/inf224/";
 std::string debianPath = "/cal/exterieurs/ryokowo-22/Desktop/inf224/";
@@ -22,10 +23,10 @@ int main(int argc, const char* argv[])
 	std::shared_ptr<Video> video = std::make_shared<Video>(10);
 	std::shared_ptr<Photo> photo = std::make_shared<Photo>(50000,50000);
 
-	video->setPath(macPath + "test.mp4");
+	video->setPath(debianPath + "test.mp4");
 	video->setType("video");
 
-	photo->setPath(macPath + "logo.png");
+	photo->setPath(debianPath + "logo.png");
 	photo->setType("photo");
 
 	lista->push_back(video);

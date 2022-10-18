@@ -1,10 +1,12 @@
 #ifndef Video_h
 #define Video_h
 
-#include <iostream>
-#include <string>
 #include "Media.h"
 
+#include <iostream>
+#include <string>
+
+		<< " " << getType() << " "<< getPath() << std::endl;
 class Video: public Media {
 private:
 	int duree = 0;
@@ -42,7 +44,9 @@ void Video::play() {
 }
 
 void Video::show(std::ostream & s){
-	s << getDuree() << " " << getType() << " "<< getPath() << std::endl;
+	s << "Type: " << getType() << std::endl
+		<< "Path: "<< getPath() << std::endl
+		<< "Duree: " << getDuree() << std::endl;
 }
 
 #endif

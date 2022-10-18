@@ -1,10 +1,11 @@
 #ifndef Film_h
 #define Film_h
 
+#include "Video.h"
+
 #include <iostream>
 #include <algorithm>
 #include <string>
-#include "Video.h"
 
 class Film: public Video {
 private:
