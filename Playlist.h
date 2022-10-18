@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <memory>
 #include "Media.h"
 
 class Playlist: public std::list<std::shared_ptr<Media> > {
