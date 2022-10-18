@@ -15,10 +15,20 @@ typedef std::map<std::string, std::shared_ptr<Playlist> > Groupe;
 class GestionMedia {
 private:
     Multimedia multimedia;
-    Groupe groupe;
+    Groupe group;
 public:
     GestionMedia();
     ~GestionMedia() {};
+    void createGroup();
+    void createFilm();
+    void createPhoto();
+    void createVideo();
 };
+
+void GestionMedia::createGroup() {}
+void GestionMedia::createFilm() {}
+void GestionMedia::createPhoto() {}
+void GestionMedia::createVideo() {}
+
 
 #endif

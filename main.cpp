@@ -17,31 +17,38 @@ std::string debianPath = "/cal/exterieurs/ryokowo-22/Desktop/inf224/";
 int main(int argc, const char* argv[])
 {
 	// std::string name = "memorias";
-	//
+	// std::string name2 = "memorias2";
+	
 	// Playlist * lista = new Playlist(name);
-	//
+	// Playlist * lista2 = new Playlist(name2);
+	
 	// std::shared_ptr<Video> video = std::make_shared<Video>(10);
 	// std::shared_ptr<Photo> photo = std::make_shared<Photo>(50000,50000);
-	//
-	// video->setPath(debianPath + "test.mp4");
+	
+	// video->setPath(macPath + "test.mp4");
 	// video->setType("video");
-	//
-	// photo->setPath(debianPath + "logo.png");
+	
+	// photo->setPath(macPath + "logo.png");
 	// photo->setType("photo");
-	//
+	
 	// lista->push_back(video);
 	// lista->push_back(photo);
-	//
+	
 	// lista->showList(*lista);
-	//
+	
 	// for (auto & it : *lista) {
+	// 	//it->play();
+	// 	it.reset();
+	// }
+
+	// lista2->push_back(video);
+	// lista2->push_back(photo);
+
+	// for (auto & it : *lista2) {
 	// 	it->play();
 	// 	it.reset();
 	// }
-	//
-	// std::string teste = lista->getName();
-	//
-	// std::cout << teste;
+	
 
 	int s = 4;
 	int * tableau = new int[s]{10, 20, 30, 40};
@@ -65,7 +72,6 @@ int main(int argc, const char* argv[])
 
 	int * teste = new int();
 	delete teste;
-
 
     // Media * playlist[s];
 	// playlist[0] = new Video();

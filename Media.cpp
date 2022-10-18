@@ -29,5 +29,6 @@ void Media::play() {
 }
 
 void Media::show(std::ostream & s){
-	s << getType() << " "<< getPath() << std::endl;
+	s << "Type: " << getType() 
+		<< "Path: "<< getPath() << std::endl;
 }

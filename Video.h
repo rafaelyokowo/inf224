@@ -8,32 +8,32 @@
 
 class Video: public Media {
 private:
-	int duree = 0;
+	int duration = 0;
 
 public:
 	Video() : Media() {}
-	Video(int _duree);
+	Video(int _duration);
 	~Video();
-	void setDuree(int d);
-	int getDuree() const;
+	void setDuration(int d);
+	int getDuration() const;
 	void play() override;
 	void show(std::ostream & s) override;
 };
 
-Video::Video(int _duree){
-	duree = _duree;
+Video::Video(int _duration){
+	duration = _duration;
 }
 
 Video::~Video(){
 	std::cout << "Destruction d'objet Video" << std::endl;
 }
 
-void Video::setDuree(int d) {
-	duree = d;
+void Video::setDuration(int d) {
+	duration = d;
 }
 
-int Video::getDuree() const{
-	return duree;
+int Video::getDuration() const{
+	return duration;
 }
 
 void Video::play() {
@@ -45,7 +45,7 @@ void Video::play() {
 void Video::show(std::ostream & s){
 	s << "Type: " << getType() << std::endl
 		<< "Path: "<< getPath() << std::endl
-		<< "Duree: " << getDuree() << std::endl;
+		<< "Duree: " << getDuration() << std::endl;
 }
 
 #endif

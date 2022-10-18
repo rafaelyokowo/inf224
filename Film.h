@@ -15,7 +15,7 @@ private:
 public:
 	Film() : Video() {}
 	Film(int _arraySize, int * _durationArray);
-  ~Film() {};
+	~Film();
 	void setArray(int * t, int size);
 	const int * getArray() const;
 	const int getSize() const;
@@ -25,6 +25,11 @@ public:
 Film::Film(int _arraySize, int * _durationArray){
 	arraySize = _arraySize;
 	durationArray = _durationArray;
+}
+
+Film::~Film(){
+	delete [] durationArray;
+	std::cout << "Destruction d'objet Film" << std::endl;
 }
 
 void Film::setArray(int * t, int size) {

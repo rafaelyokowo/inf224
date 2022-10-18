@@ -50,7 +50,7 @@ int Photo::getLongitude() const{
 
 void Photo::play() {
 	std::string command;
-	command = "imagej " + getPath() +  "&";
+	command = "qlmanage -p " + getPath() +  "&";
 	system(command.data());
 }
 
