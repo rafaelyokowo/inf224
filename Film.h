@@ -9,7 +9,7 @@
 
 class Film: public Video {
 private:
-    int arraySize = 0;
+  int arraySize = 0;
 	int * durationArray = nullptr;
 
 public:
@@ -30,11 +30,17 @@ Film::Film(int _arraySize, int * _durationArray){
 void Film::setArray(int * t, int size) {
 	if(durationArray != nullptr) delete [] durationArray;
 
-  arraySize = size;
-	durationArray = new int[arraySize];
-	for (int i = 0; i < arraySize; i++){
-       durationArray[i] = t[i];
-	}
+  if(t == nullptr){
+    arraySize = 0;
+    durationArray = t;
+  }
+  else {
+    arraySize = size;
+  	durationArray = new int[arraySize];
+  	for (int i = 0; i < arraySize; i++){
+         durationArray[i] = t[i];
+  	}
+  }
 }
 
 const int * Film::getArray() const{
@@ -55,5 +61,6 @@ void Film::show(int t){
     }
     std::cout << std::endl;
 }
+
 
 #endif
