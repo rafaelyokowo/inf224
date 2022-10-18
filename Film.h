@@ -15,7 +15,7 @@ private:
 public:
 	Film() : Video() {}
 	Film(int _arraySize, int * _durationArray);
-    ~Film() {};
+  ~Film() {};
 	void setArray(int * t, int size);
 	const int * getArray() const;
 	const int getSize() const;
@@ -30,14 +30,19 @@ Film::Film(int _arraySize, int * _durationArray){
 void Film::setArray(int * t, int size) {
 	if(durationArray != nullptr) delete [] durationArray;
 
-	// durationArray = new int[size];
-	// for (int i = 0; i < size; i++){
-    //    durationArray[i] = t[i];
-	//}
+  arraySize = size;
+	durationArray = new int[arraySize];
+	for (int i = 0; i < arraySize; i++){
+       durationArray[i] = t[i];
+	}
 }
 
 const int * Film::getArray() const{
-	return durationArray;
+  int * t = new int[arraySize];
+	for (int i = 0; i < arraySize; i++){
+       t[i] = durationArray[i];
+	}
+	return t;
 }
 
 const int Film::getSize() const{

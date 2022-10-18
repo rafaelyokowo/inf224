@@ -6,7 +6,6 @@
 #include <iostream>
 #include <string>
 
-		<< " " << getType() << " "<< getPath() << std::endl;
 class Video: public Media {
 private:
 	int duree = 0;

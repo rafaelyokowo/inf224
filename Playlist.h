@@ -13,11 +13,11 @@ private:
     std::string groupName;
 
 public:
-    Playlist();
+  Playlist();
 	Playlist(std::string _groupName);
-    ~Playlist() {};
+  ~Playlist() {};
 	std::string getName() const;
-    template <typename T> void showList(const std::list<T> & l);
+  template <typename T> void showList(const std::list<T> & l);
 };
 
 Playlist::Playlist(std::string _groupName){
