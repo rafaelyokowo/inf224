@@ -7,6 +7,7 @@
 #include "Photo.h"
 #include "Film.h"
 #include "Playlist.h"
+#include "GestionMedia.h"
 
 #include <iostream>
 #include <memory>
@@ -16,6 +17,11 @@ std::string debianPath = "/cal/exterieurs/ryokowo-22/Desktop/inf224/";
 
 int main(int argc, const char* argv[])
 {
+	GestionMedia * teste = new GestionMedia();
+	std::shared_ptr<Video> video = teste->createVideo("filme", 10);
+	video->setPath(macPath + "test.mp4");
+	teste->playMedia("filme");
+
 	// std::string name = "memorias";
 	// std::string name2 = "memorias2";
 	
@@ -50,28 +56,28 @@ int main(int argc, const char* argv[])
 	// }
 	
 
-	int s = 4;
-	int * tableau = new int[s]{10, 20, 30, 40};
-	Film * newFilm = new Film(s, tableau);
-	newFilm->show(s);
+	// int s = 4;
+	// int * tableau = new int[s]{10, 20, 30, 40};
+	// Film * newFilm = new Film(s, tableau);
+	// newFilm->show(s);
 
-	const int * read = newFilm->getArray();
-	for (int i = 0; i < s; i++){
-        std::cout << read[i] << " ";
-	}
-	std::cout << std::endl;
+	// const int * read = newFilm->getArray();
+	// for (int i = 0; i < s; i++){
+    //     std::cout << read[i] << " ";
+	// }
+	// std::cout << std::endl;
 
-	int * tableau2 = new int[s]{11, 22, 33, 44};
-	newFilm->setArray(tableau2, s);
-	newFilm->show(s);
+	// int * tableau2 = new int[s]{11, 22, 33, 44};
+	// newFilm->setArray(tableau2, s);
+	// newFilm->show(s);
 
-	for (int i = 0; i < s; i++){
-        std::cout << read[i] << " ";
-	}
-	std::cout << std::endl;
+	// for (int i = 0; i < s; i++){
+    //     std::cout << read[i] << " ";
+	// }
+	// std::cout << std::endl;
 
-	int * teste = new int();
-	delete teste;
+	// int * teste = new int();
+	// delete teste;
 
     // Media * playlist[s];
 	// playlist[0] = new Video();

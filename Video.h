@@ -11,13 +11,13 @@ private:
 	int duration = 0;
 
 public:
-	Video() : Media() {}
+	Video() : Media() {};
 	Video(int _duration);
-	~Video();
+	virtual ~Video();
 	void setDuration(int d);
 	int getDuration() const;
 	void play() override;
-	void show(std::ostream & s) override;
+	virtual void show(std::ostream & s) override;
 };
 
 Video::Video(int _duration){

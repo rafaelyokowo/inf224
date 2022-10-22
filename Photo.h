@@ -12,9 +12,9 @@ private:
 	int longitude = 0;
 
 public:
-	Photo() : Media() {}
+	Photo() : Media() {};
 	Photo(int _latitude, int _logitude);
-	~Photo();
+	virtual ~Photo();
 	void setLatitude(int lati);
 	void setLongitude(int longi);
 	int getLatitude() const;

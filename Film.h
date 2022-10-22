@@ -13,13 +13,13 @@ private:
 	int * durationArray = nullptr;
 
 public:
-	Film() : Video() {}
+	Film() : Video() {};
 	Film(int _arraySize, int * _durationArray);
-	~Film();
+	virtual ~Film();
 	void setArray(int * t, int size);
 	const int * getArray() const;
 	const int getSize() const;
-	void show(int t);
+	virtual void show(int t);
 };
 
 Film::Film(int _arraySize, int * _durationArray){

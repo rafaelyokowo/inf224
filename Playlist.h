@@ -13,7 +13,7 @@ private:
     std::string groupName;
 
 public:
-  Playlist();
+  Playlist() {};
 	Playlist(std::string _groupName);
   ~Playlist() {};
 	std::string getName() const;
