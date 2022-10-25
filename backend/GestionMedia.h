@@ -27,11 +27,13 @@ public:
     ~GestionMedia() {};
     void createGroup(std::string name);
     FilmType createFilm(std::string name);
-    PhotoType createPhoto(std::string name);
+    PhotoType createPhoto(std::string name, int latitude, int longitude);
     VideoType createVideo(std::string name, int duration);
     MediaType findMedia(std::string name);
     void showMedia(std::string name);
     void playMedia(std::string name);
+    void deleteMedia(std::string name);
+    void deleteGroup(std::string name);
 };
 
 void GestionMedia::createGroup(std::string name) {
@@ -44,8 +46,8 @@ FilmType GestionMedia::createFilm(std::string name) {
     return std::dynamic_pointer_cast<Film>(multimedia[name]);
 }
 
-PhotoType GestionMedia::createPhoto(std::string name) {
-    multimedia[name] = std::make_shared<Photo>();
+PhotoType GestionMedia::createPhoto(std::string name, int latitude, int longitude) {
+    multimedia[name] = std::make_shared<Photo>(latitude, longitude);
     multimedia.find(name)->second->setType("Photo");
     return std::dynamic_pointer_cast<Photo>(multimedia[name]);
 }
@@ -70,20 +72,39 @@ MediaType GestionMedia::findMedia(std::string name) {
 
 void GestionMedia::showMedia(std::string name) {
     MediaType media = findMedia(name);
-    if (findMedia(name) == nullptr) {
-        std::cout << "No media named: " << name << " was found/can be shown.";
+    if (media == nullptr) {
+        std::cout << "No media named: '" << name 
+                    << "' was found/can be shown." << std::endl;
     }
-    media->show(std::cout);
+    else {
+        media->show(std::cout);
+    }
 }
     
 void GestionMedia::playMedia(std::string name) {
     MediaType media = findMedia(name);
-    if (findMedia(name) == nullptr) {
-        std::cout << "No media named: " << name << " was found/can be played.";
+    if (media == nullptr) {
+        std::cout << "No media named: '" << name 
+                    << "' was found/can be played." << std::endl;
     }
-    media->play();
+    else {
+        media->play();
+    }
 }
 
+void GestionMedia::deleteMedia(std::string name) {
+    if (multimedia.empty() ==  true) {
+        std::cout << "Empty list" << std::endl;
+    }
+    else {
+        auto it = multimedia.find(name);
+        multimedia.erase(it);
+    }
+}
 
+void GestionMedia::deleteGroup(std::string name) {
+    auto it = group.find(name);
+    group.erase(it);
+}
 
 #endif
