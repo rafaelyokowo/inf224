@@ -7,6 +7,12 @@ package frontend;
 import java.io.*;
 import java.net.*;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
 public class Client
 {
   private static final long serialVersionUID = 1L;
@@ -30,32 +36,19 @@ public class Client
     if (argv.length >=2) port = Integer.parseInt(argv[1]);
     
     Client client = null;
+    GUI gui = null;
     
     try {
       client = new Client(host, port);
+      gui = new GUI(client);
     }
     catch (Exception e) {
       System.err.println("Client: Couldn't connect to "+host+":"+port);
       System.exit(1);
     }
     
-    System.out.println("Client connected to "+host+":"+port);
-
-    // pour lire depuis la console
-    BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
-    
-    while (true) {
-      System.out.print("Request: ");
-      try {
-        String request = cin.readLine();
-        String response = client.send(request);
-        System.out.println("Response: " + response);
-      }
-      catch (java.io.IOException e) {
-        System.err.println("Client: IO error");
-        return;
-      }
-    }
+    gui.setText("Client connected to "+host+":"+port);
+    // System.out.println("Client connected to "+host+":"+port);
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -115,4 +108,108 @@ public class Client
     }
   }
 }
+
+class GUI implements ActionListener{
+	
+	private JFrame frame;
+	private JPanel panel;
+	private JTextField command, info;
+	private JButton submit;
+	private JMenuBar mb;
+
+  private Client client;
+	
+	private int count = 0;
+	private String commande;
+	
+	GUI(Client _client) {
+
+    this.client = _client;
+		
+    info = new JTextField();
+		info.setPreferredSize(new Dimension(250, 80));
+    info.setEditable(false);
+
+		command = new JTextField();
+		command.setPreferredSize(new Dimension(250, 40));
+
+		submit = new JButton("Submit");
+		submit.addActionListener(this);
+			
+		panel = createPanel();
+    panel.add(info);
+		panel.add(command);
+		panel.add(submit);
+		
+		frame = createFrame();
+
+		mb = createMenuBar();
+
+		frame.setJMenuBar(mb);
+		//frame.setSize(500, 500);
+		
+		frame.pack();
+		frame.setVisible(true);
+ 
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == submit) {
+      String request = this.command.getText();
+      System.out.println("Request: " + request);
+			this.client.send(request);
+		}
+	}
+
+  public void setText(String text) {
+    this.info.setText(text);
+  }
+
+	private JFrame createFrame() {
+		frame = new JFrame();
+		frame.setTitle("TP INF224");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(true);
+		frame.setSize(1200,800);
+		frame.add(panel, BorderLayout.CENTER);
+
+		return frame;
+	}
+
+	private JPanel createPanel() {
+		JPanel panel = new JPanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 10, 30));
+		panel.setLayout(new GridLayout(0, 1));
+		panel.setFont(new Font("Arial", 0, 10));
+		return panel;
+	}
+	
+	private JMenuBar createMenuBar() {
+	
+		JMenuBar mb;
+		JMenu menu1, menu2;
+		JMenuItem m1, m2, m3;
+
+		mb = new JMenuBar();
+		menu1 = new JMenu("Menu 1");
+		menu2 = new JMenu("Menu 2");
+		
+		m1 = new JMenuItem("Item 1");
+		m2 = new JMenuItem("Item 2");
+		m3 = new JMenuItem("Item 3");
+
+		menu1.add(m1);
+		menu1.add(m2);
+		menu1.add(m3);
+
+		mb.add(menu1);
+		mb.add(menu2);
+
+		return mb;
+	}
+}
+
+
+
 

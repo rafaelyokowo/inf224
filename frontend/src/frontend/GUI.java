@@ -1,6 +1,6 @@
 package frontend;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,36 +8,34 @@ import javax.swing.*;
 
 public class GUI implements ActionListener{
 	
-	private JLabel label;
 	private JFrame frame;
 	private JPanel panel;
-	
-	static JMenuBar mb;
-	static JMenu menu1, menu2;
-	static JMenuItem m1, m2, m3;
-	static JFrame f;
+	private JTextField textField;
+	private JButton submit;
+	private JMenuBar mb;
 	
 	private int count = 0;
+	private String commande = "";
 	
 	public GUI() {
 		
-		JButton button = new JButton("Please click me !");
-		button.addActionListener(this);
-		
-		label = new JLabel("Clicks: 0");
-		
-		panel = new JPanel();
-		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 10, 30));
-		panel.setLayout(new GridLayout(0, 1));
-		panel.add(button);
-		panel.add(label);
-		
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("TP INF224");
-		frame.add(panel, BorderLayout.CENTER);
+		textField = new JTextField();
+		textField.setPreferredSize(new Dimension(250, 40));
 
-		createMenu(frame);
+		submit = new JButton("Submit");
+		submit.addActionListener(this);
+			
+		panel = createPanel();
+		panel.add(textField);
+		panel.add(submit);
+		
+		frame = createFrame();
+
+		mb = createMenuBar();
+
+		frame.setJMenuBar(mb);
+		frame.setSize(500, 500);
+		frame.setVisible(true);
 		
 		frame.pack();
 		frame.setVisible(true);
@@ -46,6 +44,7 @@ public class GUI implements ActionListener{
 	}
 	
 	public static void main(String[] args) {
+		// System.out.println(client.getName());
 		// Pour les utilisateurs de macOSX
 		// System.setProperty("apple.laf.useScreenMenuBar", "true");
 		new GUI();
@@ -53,16 +52,40 @@ public class GUI implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		count++;
-		label.setText("Clicks: " + count);
+		if (e.getSource() == submit) {
+			System.out.println(textField.getText());
+		}
+	}
+
+	private JFrame createFrame() {
+		frame = new JFrame();
+		frame.setTitle("TP INF224");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(true);
+		frame.setSize(1200,800);
+		frame.add(panel, BorderLayout.CENTER);
+
+		return frame;
+	}
+
+	private JPanel createPanel() {
+		JPanel panel = new JPanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 10, 30));
+		panel.setLayout(new GridLayout(0, 1));
+		panel.setFont(new Font("Arial", 0, 10));
+		return panel;
 	}
 	
-	private void createMenu(JFrame f) {
+	private JMenuBar createMenuBar() {
+	
+		JMenuBar mb;
+		JMenu menu1, menu2;
+		JMenuItem m1, m2, m3;
+
 		mb = new JMenuBar();
 		menu1 = new JMenu("Menu 1");
 		menu2 = new JMenu("Menu 2");
 		
-
 		m1 = new JMenuItem("Item 1");
 		m2 = new JMenuItem("Item 2");
 		m3 = new JMenuItem("Item 3");
@@ -74,8 +97,6 @@ public class GUI implements ActionListener{
 		mb.add(menu1);
 		mb.add(menu2);
 
-		f.setJMenuBar(mb);
-		f.setSize(500, 500);
-		f.setVisible(true);
+		return mb;
 	}
 }
