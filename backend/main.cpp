@@ -29,6 +29,7 @@ const int PORT = 3331;
 int main(int argc, const char* argv[])
 {
 	GestionMedia * teste = new GestionMedia();
+	Photo * foto = new Photo();
 	// GestionMedia * teste2 = new GestionMedia();
 
 	std::shared_ptr<Video> video = teste->createVideo("filme", 10);
