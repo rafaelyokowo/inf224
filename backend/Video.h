@@ -17,7 +17,8 @@ public:
 	void setDuration(int d);
 	int getDuration() const;
 	void play() override;
-	virtual void show(std::ostream & s) override;
+	void showTerminal(std::ostream & s) override;
+	virtual std::string show() override;
 };
 
 Video::Video(int _duration){
@@ -42,10 +43,14 @@ void Video::play() {
 	system(command.data());
 }
 
-void Video::show(std::ostream & s){
+void Video::showTerminal(std::ostream & s){
 	s << "Type: " << getType() << std::endl
 		<< "Path: "<< getPath() << std::endl
 		<< "Duree: " << getDuration() << std::endl;
+}
+
+std::string Video::show(){
+	return "Type: " + getType() + "|" + "Path: " + getPath() + "|" + "Duree: " + std::to_string(getDuration()) + "\n";
 }
 
 #endif

@@ -30,10 +30,12 @@ public:
     PhotoType createPhoto(std::string name, int latitude, int longitude);
     VideoType createVideo(std::string name, int duration);
     MediaType findMedia(std::string name);
-    void showMedia(std::string name);
+    // void showMedia(std::string name);
     void playMedia(std::string name);
     void deleteMedia(std::string name);
     void deleteGroup(std::string name);
+
+    std::string showMedia(std::string name);
 };
 
 void GestionMedia::createGroup(std::string name) {
@@ -70,14 +72,14 @@ MediaType GestionMedia::findMedia(std::string name) {
     }
 }
 
-void GestionMedia::showMedia(std::string name) {
+std::string GestionMedia::showMedia(std::string name) {
     MediaType media = findMedia(name);
     if (media == nullptr) {
-        std::cout << "No media named: '" << name 
-                    << "' was found/can be shown." << std::endl;
+        return "No media named: '" + name +
+               "' was found/can be shown.";
     }
     else {
-        media->show(std::cout);
+        return media->show();
     }
 }
     

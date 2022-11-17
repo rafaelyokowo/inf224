@@ -4,8 +4,8 @@
 #include <string>
 
 Media::Media(std::string _type, std::string _path){
-	type = _type;
-	path = _path;
+	std::string type = _type;
+	std::string path = _path;
 }
 
 void Media::setType(std::string t){
@@ -28,7 +28,12 @@ void Media::play() {
 	return;
 }
 
-void Media::show(std::ostream & s){
-	s << "Type: " << getType() 
-		<< "Path: "<< getPath() << std::endl;
+void Media::showTerminal(std::ostream & s){
+	s << "Type: " << getType() << std::endl
+	  << "Path: " << getPath() << std::endl;
+}
+
+std::string Media::show(){
+	return "Type: " + getType() +
+		   "Path: " + getPath();
 }

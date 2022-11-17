@@ -46,8 +46,6 @@ public class Client
       System.err.println("Client: Couldn't connect to "+host+":"+port);
       System.exit(1);
     }
-    
-    gui.setText("Client connected to "+host+":"+port);
     // System.out.println("Client connected to "+host+":"+port);
   }
 
@@ -113,9 +111,11 @@ class GUI implements ActionListener{
 	
 	private JFrame frame;
 	private JPanel panel;
-	private JTextField command, info;
-	private JButton submit;
+	private JButton b1, b2, exitBtn;
 	private JMenuBar mb;
+  private JToolBar tb;
+  private JTextField tf, text;
+  private JTextArea textArea;
 
   private Client client;
 	
@@ -125,54 +125,53 @@ class GUI implements ActionListener{
 	GUI(Client _client) {
 
     this.client = _client;
-		
-    info = new JTextField();
-		info.setPreferredSize(new Dimension(250, 80));
-    info.setEditable(false);
-
-		command = new JTextField();
-		command.setPreferredSize(new Dimension(250, 40));
-
-		submit = new JButton("Submit");
-		submit.addActionListener(this);
 			
 		panel = createPanel();
-    panel.add(info);
-		panel.add(command);
-		panel.add(submit);
-		
-		frame = createFrame();
+    frame = createFrame();
+    mb = createMenuBar();
 
-		mb = createMenuBar();
+    textArea = new JTextArea(20, 20);  
+    JScrollPane scrollableTextArea = new JScrollPane(textArea);
+    scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
+    scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+
+    panel.add(scrollableTextArea, BorderLayout.SOUTH); 
 
 		frame.setJMenuBar(mb);
-		//frame.setSize(500, 500);
+    frame.add(panel, BorderLayout.CENTER);
 		
 		frame.pack();
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
- 
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == submit) {
-      String request = this.command.getText();
-      System.out.println("Request: " + request);
-			this.client.send(request);
-		}
-	}
+		String command = e.getActionCommand();
+    // BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
 
-  public void setText(String text) {
-    this.info.setText(text);
-  }
+    if (command == "MENU_1") {
+      String request = this.textArea.getText();
+    
+		  String rep = this.client.send("P-logo telecom");
+      System.out.println("Request: " + "logo telecom");
+      this.textArea.setText(rep);
+      //while (true) {
+      // }
+    }
+    if (command == "BUTTON_1")
+      this.textArea.setText("A\n");
+    if (command == "BUTTON_2")
+      this.textArea.setText("B\n");
+    if (command == "EXIT_BUTTON")
+      System.exit(0);
+	}
 
 	private JFrame createFrame() {
 		frame = new JFrame();
 		frame.setTitle("TP INF224");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(true);
+		frame.setResizable(false);
 		frame.setSize(1200,800);
-		frame.add(panel, BorderLayout.CENTER);
 
 		return frame;
 	}
@@ -187,29 +186,42 @@ class GUI implements ActionListener{
 	
 	private JMenuBar createMenuBar() {
 	
-		JMenuBar mb;
-		JMenu menu1, menu2;
-		JMenuItem m1, m2, m3;
+    JMenuBar mb;
+		JMenu menu1;
+		JMenuItem m1, m2;
 
-		mb = new JMenuBar();
+    this.exitBtn = new JButton("Exit");
+    this.exitBtn.setActionCommand("EXIT_BUTTON");
+    this.exitBtn.addActionListener(this);
+
+    this.b1 = new JButton("Add 1");
+    this.b1.setActionCommand("BUTTON_1");
+    this.b1.addActionListener(this);
+
+    this.b2 = new JButton("Add 2");
+    this.b2.setActionCommand("BUTTON_2");
+    this.b2.addActionListener(this);
+  
+    tb = new JToolBar();
+    tb.add(this.b1);
+    tb.add(this.b2);
+    tb.add(this.exitBtn);
+
+    mb = new JMenuBar();
 		menu1 = new JMenu("Menu 1");
-		menu2 = new JMenu("Menu 2");
 		
 		m1 = new JMenuItem("Item 1");
-		m2 = new JMenuItem("Item 2");
-		m3 = new JMenuItem("Item 3");
-
+    m1.setActionCommand("MENU_1");
+    m1.addActionListener(this);
 		menu1.add(m1);
-		menu1.add(m2);
-		menu1.add(m3);
 
-		mb.add(menu1);
-		mb.add(menu2);
+		m2 = new JMenuItem("Item 2");
+		menu1.add(m2);
+
+
+    mb.add(menu1);
+    mb.add(tb);
 
 		return mb;
 	}
 }
-
-
-
-

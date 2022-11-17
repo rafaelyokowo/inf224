@@ -20,7 +20,8 @@ public:
 	int getLatitude() const;
 	int getLongitude() const;
 	void play() override;
-	void show(std::ostream & s) override;
+	void showTerminal(std::ostream & s) override;
+	std::string show() override;
 };
 
 Photo::Photo(int _latitude, int _longitude){
@@ -54,11 +55,18 @@ void Photo::play() {
 	system(command.data());
 }
 
-void Photo::show(std::ostream & s){
+void Photo::showTerminal(std::ostream & s){
 	s << "Type: " << getType() << std::endl
 		<< "Path: "<< getPath() << std::endl
 		<< "Latitude: " << getLatitude() << std::endl
 		<< "Longitude: " << getLongitude() << std::endl;
+}
+
+std::string Photo::show() {
+	return "Type: " +  getType() +
+		   "Path: " + getPath() +
+		   "Latitude: " + std::to_string(getLatitude()) +
+		   "Longitude: " + std::to_string(getLongitude());
 }
 
 #endif

@@ -10,7 +10,7 @@
 class Film: public Video {
 private:
   int arraySize = 0;
-	int * durationArray = nullptr;
+  int * durationArray = nullptr;
 
 public:
 	Film() : Video() {};
@@ -19,7 +19,7 @@ public:
 	void setArray(int * t, int size);
 	const int * getArray() const;
 	const int getSize() const;
-	virtual void show(int t);
+	std::string show() override;
 };
 
 Film::Film(int _arraySize, int * _durationArray){
@@ -60,11 +60,12 @@ const int Film::getSize() const{
 	return arraySize;
 }
 
-void Film::show(int t){
-    for(int i = 0; i < t; i++){
-        std::cout << durationArray[i] << " ";
+std::string Film::show(){
+	std::string durations;
+    for(int i = 0; i < sizeof(durationArray); i++){
+		durations += std::to_string(durationArray[i]) + " ";
     }
-    std::cout << std::endl;
+    return durations;
 }
 
 

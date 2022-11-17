@@ -5,8 +5,8 @@
 
 class Media {
 private:
-	std::string type{};
-	std::string path{};
+	std::string type = "foo";
+	std::string path = "bar";
 
 public:
 	Media() {};
@@ -17,7 +17,8 @@ public:
 	void setPath(std::string p);
 	std::string getPath() const;
 	virtual void play();
-	virtual void show(std::ostream & s);
+	virtual void showTerminal(std::ostream & s);
+	virtual std::string show();
 };
 
 #endif

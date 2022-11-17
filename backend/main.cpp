@@ -45,11 +45,19 @@ int main(int argc, const char* argv[])
   	// the request sent by the client to the server
   	std::cout << "request: " << request << std::endl;
 
-	teste->playMedia(request);
+	std::string req = request.substr(0, request.find("-"));
+	std::cout << req;
+	if (req == "P"){
+		teste->playMedia(request.substr(2));
+	}
+	if (req == "S"){
+		response = teste->showMedia(request.substr(2));
+	}
+
 	// teste->deleteMedia(request);
 
   	// the response that the server sends back to the client
-  	response = "RECEIVED: " + request;
+  	// response = "RECEIVED: " + request;
 
   	// return false would close the connecytion with the client
   	return true;
