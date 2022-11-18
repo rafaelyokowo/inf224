@@ -153,7 +153,7 @@ class GUI implements ActionListener{
     if (command == "MENU_1") {
       String request = this.textArea.getText();
     
-		  String rep = this.client.send("P-logo telecom");
+		  String rep = this.client.send("S-logo telecom");
       System.out.println("Request: " + "logo telecom");
       this.textArea.setText(rep);
       //while (true) {
@@ -179,7 +179,7 @@ class GUI implements ActionListener{
 	private JPanel createPanel() {
 		JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 10, 30));
-		panel.setLayout(new GridLayout(0, 1));
+		panel.setLayout(new GridLayout(1, 1));
 		panel.setFont(new Font("Arial", 0, 10));
 		return panel;
 	}
@@ -187,8 +187,8 @@ class GUI implements ActionListener{
 	private JMenuBar createMenuBar() {
 	
     JMenuBar mb;
-		JMenu menu1;
-		JMenuItem m1, m2;
+		JMenu menu1, menu2;
+		JMenuItem m1, m2, m;
 
     this.exitBtn = new JButton("Exit");
     this.exitBtn.setActionCommand("EXIT_BUTTON");
@@ -208,16 +208,26 @@ class GUI implements ActionListener{
     tb.add(this.exitBtn);
 
     mb = new JMenuBar();
-		menu1 = new JMenu("Menu 1");
+    mb.setOpaque(true);
+    mb.setBackground(Color.WHITE);
+		menu1 = new JMenu("Afficher Media");
+    menu2 = new JMenu("List Media");
 		
-		m1 = new JMenuItem("Item 1");
-    m1.setActionCommand("MENU_1");
-    m1.addActionListener(this);
-		menu1.add(m1);
+		// m1 = new JMenuItem("Item 1");
+    // m1.setBackground(Color.WHITE);
+		// menu1.add(m1);
 
 		m2 = new JMenuItem("Item 2");
+    m2.setActionCommand("MENU_1");
+    m2.addActionListener(this);
 		menu1.add(m2);
 
+    for (int i = 0; i < 3; i++) {
+      m = new JMenuItem("Item");
+		  menu2.add(m);
+    }
+
+    menu1.add(menu2);
 
     mb.add(menu1);
     mb.add(tb);

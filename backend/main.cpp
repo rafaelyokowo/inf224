@@ -30,13 +30,9 @@ int main(int argc, const char* argv[])
 {
 	GestionMedia * teste = new GestionMedia();
 	Photo * foto = new Photo();
-	// GestionMedia * teste2 = new GestionMedia();
 
-	std::shared_ptr<Video> video = teste->createVideo("filme", 10);
-	std::shared_ptr<Photo> photo = teste->createPhoto("logo telecom", 10, 10);
-
-	photo->setPath(path + "logo.png");
-	video->setPath(path + "test.mp4");
+	std::shared_ptr<Video> video = teste->createVideo("filme", path + "test.mp4", 10);
+	std::shared_ptr<Photo> photo = teste->createPhoto("logo telecom", path + "logo.png", 10, 10);
 
 	// cree le TCPServer
   	auto* server =

@@ -27,15 +27,15 @@ public:
     ~GestionMedia() {};
     void createGroup(std::string name);
     FilmType createFilm(std::string name);
-    PhotoType createPhoto(std::string name, int latitude, int longitude);
-    VideoType createVideo(std::string name, int duration);
+    PhotoType createPhoto(std::string name, std::string _path, int latitude, int longitude);
+    VideoType createVideo(std::string name, std::string _path, int duration);
     MediaType findMedia(std::string name);
     // void showMedia(std::string name);
+    std::string showMedia(std::string name);
     void playMedia(std::string name);
     void deleteMedia(std::string name);
     void deleteGroup(std::string name);
 
-    std::string showMedia(std::string name);
 };
 
 void GestionMedia::createGroup(std::string name) {
@@ -48,15 +48,17 @@ FilmType GestionMedia::createFilm(std::string name) {
     return std::dynamic_pointer_cast<Film>(multimedia[name]);
 }
 
-PhotoType GestionMedia::createPhoto(std::string name, int latitude, int longitude) {
+PhotoType GestionMedia::createPhoto(std::string name, std::string _path, int latitude, int longitude) {
     multimedia[name] = std::make_shared<Photo>(latitude, longitude);
     multimedia.find(name)->second->setType("Photo");
+    multimedia.find(name)->second->setPath(_path);
     return std::dynamic_pointer_cast<Photo>(multimedia[name]);
 }
 
-VideoType GestionMedia::createVideo(std::string name, int duration) {
+VideoType GestionMedia::createVideo(std::string name, std::string _path, int duration) {
     multimedia[name] = std::make_shared<Video>(duration);
     multimedia.find(name)->second->setType("Video");
+    multimedia.find(name)->second->setPath(_path);
     return std::dynamic_pointer_cast<Video>(multimedia[name]);
 }
 

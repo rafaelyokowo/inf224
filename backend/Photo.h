@@ -13,7 +13,7 @@ private:
 
 public:
 	Photo() : Media() {};
-	Photo(int _latitude, int _logitude);
+	Photo(std::string _path, int _latitude, int _longitude);
 	virtual ~Photo();
 	void setLatitude(int lati);
 	void setLongitude(int longi);
@@ -24,7 +24,8 @@ public:
 	std::string show() override;
 };
 
-Photo::Photo(int _latitude, int _longitude){
+Photo::Photo(std::string _path, int _latitude, int _longitude){
+	this->setPath(_path);
 	latitude = _latitude;
 	longitude = _longitude;
 }

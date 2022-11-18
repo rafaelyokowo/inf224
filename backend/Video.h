@@ -12,7 +12,7 @@ private:
 
 public:
 	Video() : Media() {};
-	Video(int _duration);
+	Video(std::string _path, int _duration);
 	virtual ~Video();
 	void setDuration(int d);
 	int getDuration() const;
@@ -21,7 +21,8 @@ public:
 	virtual std::string show() override;
 };
 
-Video::Video(int _duration){
+Video::Video(std::string _path, int _duration){
+	this->setPath(_path);
 	duration = _duration;
 }
 
