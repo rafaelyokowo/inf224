@@ -16,6 +16,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 std::string get_working_path()
 {
@@ -28,11 +29,13 @@ const int PORT = 3331;
 
 int main(int argc, const char* argv[])
 {
-	GestionMedia * teste = new GestionMedia();
-	Photo * foto = new Photo();
+	GestionMedia * media = new GestionMedia();
 
-	std::shared_ptr<Video> video = teste->createVideo("filme", path + "test.mp4", 10);
-	std::shared_ptr<Photo> photo = teste->createPhoto("logo telecom", path + "logo.png", 10, 10);
+	std::shared_ptr<Video> video = media->createVideo("filme", path + "test.mp4", 10);
+	std::shared_ptr<Photo> photo1 = media->createPhoto("telecom", path + "logo.png", 10, 10);
+	std::shared_ptr<Photo> photo2 = media->createPhoto("ip-paris", path + "logo-ipparis.png", 10, 10);
+
+	std::cout << media->listMedia();
 
 	// cree le TCPServer
   	auto* server =
@@ -44,10 +47,14 @@ int main(int argc, const char* argv[])
 	std::string req = request.substr(0, request.find("-"));
 	std::cout << req;
 	if (req == "P"){
-		teste->playMedia(request.substr(2));
+		media->playMedia(request.substr(2));
 	}
 	if (req == "S"){
-		response = teste->showMedia(request.substr(2));
+		response = media->showMedia(request.substr(2));
+	}
+	if (req == "L"){
+		std::cout << media->listMedia();
+		response = media->listMedia();
 	}
 
 	// teste->deleteMedia(request);

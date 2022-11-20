@@ -64,9 +64,9 @@ void Photo::showTerminal(std::ostream & s){
 }
 
 std::string Photo::show() {
-	return "Type: " +  getType() +
-		   "Path: " + getPath() +
-		   "Latitude: " + std::to_string(getLatitude()) +
+	return "Type: " +  getType() + "@@" +
+		   "Path: " + getPath() + "@@" +
+		   "Latitude: " + std::to_string(getLatitude()) + "@@" +
 		   "Longitude: " + std::to_string(getLongitude());
 }
 

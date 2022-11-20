@@ -51,7 +51,9 @@ void Video::showTerminal(std::ostream & s){
 }
 
 std::string Video::show(){
-	return "Type: " + getType() + "|" + "Path: " + getPath() + "|" + "Duree: " + std::to_string(getDuration()) + "\n";
+	return "Type: " + getType() + "@@" + 
+		   "Path: " + getPath() + "@@" + 
+		   "Duree: " + std::to_string(getDuration()) + "\n";
 }
 
 #endif

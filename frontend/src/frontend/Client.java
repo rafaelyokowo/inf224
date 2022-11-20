@@ -111,11 +111,14 @@ class GUI implements ActionListener{
 	
 	private JFrame frame;
 	private JPanel panel;
-	private JButton b1, b2, exitBtn;
+	private JButton b1, b2, exitBtn, clear;
 	private JMenuBar mb;
   private JToolBar tb;
   private JTextField tf, text;
   private JTextArea textArea;
+
+	private JMenu mediaMenu;
+	private JMenuItem listMenu, m2, m;
 
   private Client client;
 	
@@ -128,43 +131,63 @@ class GUI implements ActionListener{
 			
 		panel = createPanel();
     frame = createFrame();
-    mb = createMenuBar();
+    createMenuBar();
 
     textArea = new JTextArea(20, 20);  
     JScrollPane scrollableTextArea = new JScrollPane(textArea);
     scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
     scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
 
+    this.clear = new JButton("Clear");
+    this.clear.setActionCommand("CLEAR_BUTTON");
+    this.clear.addActionListener(this);
+
     panel.add(scrollableTextArea, BorderLayout.SOUTH); 
 
 		frame.setJMenuBar(mb);
     frame.add(panel, BorderLayout.CENTER);
+    frame.add(this.clear, BorderLayout.SOUTH);
 		
 		frame.pack();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
+
+  private void printText(String text) {
+    String[] arrOfStr = text.split("@", 100);
+      for (String name : arrOfStr){
+        this.textArea.append(name);
+        this.textArea.append("\n");
+      }
+  }
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
-    // BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
+    String request = "foo";
+    String response = "bar";
 
-    if (command == "MENU_1") {
-      String request = this.textArea.getText();
-    
-		  String rep = this.client.send("S-logo telecom");
-      System.out.println("Request: " + "logo telecom");
-      this.textArea.setText(rep);
-      //while (true) {
-      // }
+    if (command == "LIST") {
+		  String rep = this.client.send("L-");
+      String[] arrOfStr = rep.split("@@", 100);
+      for (String name : arrOfStr){
+        this.textArea.append(name);
+      }
     }
-    if (command == "BUTTON_1")
-      this.textArea.setText("A\n");
-    if (command == "BUTTON_2")
-      this.textArea.setText("B\n");
+    if (command == "BUTTON_1"){
+      request = this.tf.getText();
+      response = this.client.send("P-"+request);
+    }
+    if (command == "BUTTON_2") {
+      request = this.tf.getText();
+      response = this.client.send("S-"+request);
+      this.printText(response);
+    }
     if (command == "EXIT_BUTTON")
       System.exit(0);
+
+    if (command == "CLEAR_BUTTON")
+      this.textArea.setText("");
 	}
 
 	private JFrame createFrame() {
@@ -184,54 +207,40 @@ class GUI implements ActionListener{
 		return panel;
 	}
 	
-	private JMenuBar createMenuBar() {
-	
-    JMenuBar mb;
-		JMenu menu1, menu2;
-		JMenuItem m1, m2, m;
+	private void createMenuBar() {
 
     this.exitBtn = new JButton("Exit");
     this.exitBtn.setActionCommand("EXIT_BUTTON");
     this.exitBtn.addActionListener(this);
 
-    this.b1 = new JButton("Add 1");
+    this.b1 = new JButton("Play");
     this.b1.setActionCommand("BUTTON_1");
     this.b1.addActionListener(this);
 
-    this.b2 = new JButton("Add 2");
+    this.b2 = new JButton("Show");
     this.b2.setActionCommand("BUTTON_2");
     this.b2.addActionListener(this);
-  
+
+    this.tf = new JTextField();
+
     tb = new JToolBar();
+    tb.add(this.tf);
     tb.add(this.b1);
     tb.add(this.b2);
     tb.add(this.exitBtn);
 
-    mb = new JMenuBar();
-    mb.setOpaque(true);
-    mb.setBackground(Color.WHITE);
-		menu1 = new JMenu("Afficher Media");
-    menu2 = new JMenu("List Media");
-		
-		// m1 = new JMenuItem("Item 1");
-    // m1.setBackground(Color.WHITE);
-		// menu1.add(m1);
+    this.mb = new JMenuBar();
+    this.mb.setOpaque(true);
+    this.mb.setBackground(Color.WHITE);
+		this.mediaMenu = new JMenu("Media");
+    
+    this.listMenu = new JMenuItem("List");
+    this.listMenu.setActionCommand("LIST");
+    this.listMenu.addActionListener(this);
 
-		m2 = new JMenuItem("Item 2");
-    m2.setActionCommand("MENU_1");
-    m2.addActionListener(this);
-		menu1.add(m2);
+    this.mediaMenu.add(listMenu);
 
-    for (int i = 0; i < 3; i++) {
-      m = new JMenuItem("Item");
-		  menu2.add(m);
-    }
-
-    menu1.add(menu2);
-
-    mb.add(menu1);
-    mb.add(tb);
-
-		return mb;
+    this.mb.add(mediaMenu);
+    this.mb.add(tb);
 	}
 }

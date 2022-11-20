@@ -9,9 +9,11 @@
 #include <string>
 #include <memory>
 #include <map>
+#include <vector>
 
 typedef std::map<std::string, std::shared_ptr<Media> > Multimedia;
 typedef std::map<std::string, std::shared_ptr<Playlist> > Group;
+typedef std::vector<std::string> NameList;
 
 typedef std::shared_ptr<Film> FilmType;
 typedef std::shared_ptr<Media> MediaType;
@@ -32,6 +34,7 @@ public:
     MediaType findMedia(std::string name);
     // void showMedia(std::string name);
     std::string showMedia(std::string name);
+    std::string listMedia();
     void playMedia(std::string name);
     void deleteMedia(std::string name);
     void deleteGroup(std::string name);
@@ -49,16 +52,14 @@ FilmType GestionMedia::createFilm(std::string name) {
 }
 
 PhotoType GestionMedia::createPhoto(std::string name, std::string _path, int latitude, int longitude) {
-    multimedia[name] = std::make_shared<Photo>(latitude, longitude);
+    multimedia[name] = std::make_shared<Photo>(_path, latitude, longitude);
     multimedia.find(name)->second->setType("Photo");
-    multimedia.find(name)->second->setPath(_path);
     return std::dynamic_pointer_cast<Photo>(multimedia[name]);
 }
 
 VideoType GestionMedia::createVideo(std::string name, std::string _path, int duration) {
-    multimedia[name] = std::make_shared<Video>(duration);
+    multimedia[name] = std::make_shared<Video>(_path, duration);
     multimedia.find(name)->second->setType("Video");
-    multimedia.find(name)->second->setPath(_path);
     return std::dynamic_pointer_cast<Video>(multimedia[name]);
 }
 
@@ -83,6 +84,14 @@ std::string GestionMedia::showMedia(std::string name) {
     else {
         return media->show();
     }
+}
+
+std::string GestionMedia::listMedia() {
+    std::string list;
+    for (auto const& x: this->multimedia){
+        list += x.first + "@@";
+    }
+    return list;
 }
     
 void GestionMedia::playMedia(std::string name) {
