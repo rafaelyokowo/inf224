@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.SimpleAttributeSet;
 
 public class Client
 {
@@ -111,14 +114,15 @@ class GUI implements ActionListener{
 	
 	private JFrame frame;
 	private JPanel panel;
-	private JButton b1, b2, exitBtn, clear;
-	private JMenuBar mb;
   private JToolBar tb;
-  private JTextField tf, text;
+  private JTextField tf;
   private JTextArea textArea;
+  private JTextPane textPane;
+	private JButton b1, b2, exitBtn, clear;
 
-	private JMenu mediaMenu;
-	private JMenuItem listMenu, m2, m;
+	private JMenuBar mb;
+	private JMenu menu, listMenu;
+	private JMenuItem mediaMenu, groupMenu;
 
   private Client client;
 	
@@ -137,16 +141,30 @@ class GUI implements ActionListener{
     JScrollPane scrollableTextArea = new JScrollPane(textArea);
     scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
     scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+    
+    panel.add(scrollableTextArea, BorderLayout.SOUTH); 
 
     this.clear = new JButton("Clear");
     this.clear.setActionCommand("CLEAR_BUTTON");
     this.clear.addActionListener(this);
 
-    panel.add(scrollableTextArea, BorderLayout.SOUTH); 
+    textPane = new JTextPane();
+    StyledDocument documentStyle = textPane.getStyledDocument();
+    SimpleAttributeSet centerAttribute = new SimpleAttributeSet();
+    StyleConstants.setAlignment(centerAttribute, StyleConstants.ALIGN_CENTER);
+    documentStyle.setParagraphAttributes(0, documentStyle.getLength(), centerAttribute, false);
+
+    Font font = new Font("Arial", Font.BOLD, 12);
+    textPane.setText("\nBienvenue à L'Interface Media 3.0 !\n" +
+                  "Pour voir les medias disponibles, veuillez acceder \n" +
+                  "à Media > List et selectioner l'option souhaitée.\n");
+    textPane.setEditable(false);
+    textPane.setFont(font);
 
 		frame.setJMenuBar(mb);
     frame.add(panel, BorderLayout.CENTER);
     frame.add(this.clear, BorderLayout.SOUTH);
+    frame.add(textPane, BorderLayout.NORTH);
 		
 		frame.pack();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -154,7 +172,7 @@ class GUI implements ActionListener{
 	}
 
   private void printText(String text) {
-    String[] arrOfStr = text.split("@", 100);
+    String[] arrOfStr = text.split("@@", 100);
       for (String name : arrOfStr){
         this.textArea.append(name);
         this.textArea.append("\n");
@@ -167,11 +185,18 @@ class GUI implements ActionListener{
     String request = "foo";
     String response = "bar";
 
-    if (command == "LIST") {
-		  String rep = this.client.send("L-");
+    if (command == "LIST_MEDIA") {
+		  String rep = this.client.send("LM-");
       String[] arrOfStr = rep.split("@@", 100);
       for (String name : arrOfStr){
-        this.textArea.append(name);
+        this.textArea.append(name + '\n');
+      }
+    }
+    if (command == "LIST_GROUP") {
+		  String rep = this.client.send("LG-");
+      String[] arrOfStr = rep.split("@@", 100);
+      for (String name : arrOfStr){
+        this.textArea.append(name + '\n');
       }
     }
     if (command == "BUTTON_1"){
@@ -194,7 +219,7 @@ class GUI implements ActionListener{
 		frame = new JFrame();
 		frame.setTitle("TP INF224");
 		frame.setResizable(false);
-		frame.setSize(1200,800);
+		frame.setSize(1600,1200);
 
 		return frame;
 	}
@@ -232,15 +257,22 @@ class GUI implements ActionListener{
     this.mb = new JMenuBar();
     this.mb.setOpaque(true);
     this.mb.setBackground(Color.WHITE);
-		this.mediaMenu = new JMenu("Media");
+		this.menu = new JMenu("Media");
     
-    this.listMenu = new JMenuItem("List");
-    this.listMenu.setActionCommand("LIST");
-    this.listMenu.addActionListener(this);
+    this.listMenu = new JMenu("List");
 
-    this.mediaMenu.add(listMenu);
+    this.mediaMenu = new JMenuItem("Media");
+    this.mediaMenu.setActionCommand("LIST_MEDIA");
+    this.mediaMenu.addActionListener(this);
+    this.groupMenu = new JMenuItem("Group");
+    this.groupMenu.setActionCommand("LIST_GROUP");
+    this.groupMenu.addActionListener(this);
 
-    this.mb.add(mediaMenu);
+    this.listMenu.add(mediaMenu);
+    this.listMenu.add(groupMenu);
+    this.menu.add(listMenu);
+
+    this.mb.add(menu);
     this.mb.add(tb);
 	}
 }

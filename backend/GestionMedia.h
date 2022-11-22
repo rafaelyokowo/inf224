@@ -13,7 +13,6 @@
 
 typedef std::map<std::string, std::shared_ptr<Media> > Multimedia;
 typedef std::map<std::string, std::shared_ptr<Playlist> > Group;
-typedef std::vector<std::string> NameList;
 
 typedef std::shared_ptr<Film> FilmType;
 typedef std::shared_ptr<Media> MediaType;
@@ -35,6 +34,7 @@ public:
     // void showMedia(std::string name);
     std::string showMedia(std::string name);
     std::string listMedia();
+    std::string listGroup();
     void playMedia(std::string name);
     void deleteMedia(std::string name);
     void deleteGroup(std::string name);
@@ -89,6 +89,14 @@ std::string GestionMedia::showMedia(std::string name) {
 std::string GestionMedia::listMedia() {
     std::string list;
     for (auto const& x: this->multimedia){
+        list += x.first + "@@";
+    }
+    return list;
+}
+
+std::string GestionMedia::listGroup() {
+    std::string list;
+    for (auto const& x: this->group){
         list += x.first + "@@";
     }
     return list;

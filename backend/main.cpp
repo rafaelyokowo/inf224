@@ -30,39 +30,37 @@ const int PORT = 3331;
 int main(int argc, const char* argv[])
 {
 	GestionMedia * media = new GestionMedia();
+	GestionMedia * group = new GestionMedia();
 
-	std::shared_ptr<Video> video = media->createVideo("filme", path + "test.mp4", 10);
-	std::shared_ptr<Photo> photo1 = media->createPhoto("telecom", path + "logo.png", 10, 10);
-	std::shared_ptr<Photo> photo2 = media->createPhoto("ip-paris", path + "logo-ipparis.png", 10, 10);
+	group->createGroup("Group-A");
+	group->createGroup("Group-B");
+	group->createGroup("Group-C");
 
-	std::cout << media->listMedia();
+	std::shared_ptr<Video> video = media->createVideo("Video", path + "test.mp4", 10);
+	std::shared_ptr<Photo> photo1 = media->createPhoto("Logo-Telecom", path + "logo.png", 10, 10);
+	std::shared_ptr<Photo> photo2 = media->createPhoto("Logo-IP-Paris", path + "logo-ipparis.png", 10, 10);
 
 	// cree le TCPServer
   	auto* server =
   	new TCPServer( [&](std::string const& request, std::string& response) {
 
   	// the request sent by the client to the server
-  	std::cout << "request: " << request << std::endl;
-
 	std::string req = request.substr(0, request.find("-"));
-	std::cout << req;
+
+	// the responses that the server sends back to the client
 	if (req == "P"){
 		media->playMedia(request.substr(2));
 	}
 	if (req == "S"){
 		response = media->showMedia(request.substr(2));
 	}
-	if (req == "L"){
-		std::cout << media->listMedia();
+	if (req == "LM"){
 		response = media->listMedia();
 	}
+	if (req == "LG"){
+		response = group->listGroup();
+	}
 
-	// teste->deleteMedia(request);
-
-  	// the response that the server sends back to the client
-  	// response = "RECEIVED: " + request;
-
-  	// return false would close the connecytion with the client
   	return true;
 	});
 
