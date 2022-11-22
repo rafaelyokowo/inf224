@@ -14,7 +14,7 @@ PROG = myprog
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
-SOURCES = Media.cpp main.cpp
+SOURCES = Media.cpp main.cpp tcpserver.cpp ccsocket.cpp
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
@@ -37,13 +37,13 @@ CXXFLAGS = -std=c++11 -Wall -g
 #
 # Options de l'editeur de liens
 #
-LDFLAGS = 
+LDFLAGS =
 
 #
 # Librairies a utiliser
 # Exemple: LDLIBS = -L/usr/local/qt/lib -lqt
 #
-LDLIBS = 
+LDLIBS =
 
 
 ##########################################
@@ -51,7 +51,7 @@ LDLIBS =
 # Regles de construction/destruction des .o et de l'executable
 # depend-${PROG} sera un fichier contenant les dependances
 #
- 
+
 all: ${PROG}
 
 run: ${PROG}
@@ -69,7 +69,7 @@ clean-all: clean
 tar:
 	tar cvf ${PROG}.tar.gz ${SOURCES}
 
-# Gestion des dependances : creation automatique des dependances en utilisant 
+# Gestion des dependances : creation automatique des dependances en utilisant
 # l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)
 #
 depend-${PROG}:

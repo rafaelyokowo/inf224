@@ -1,3 +1,13 @@
+# Object files
 *.o
+.swp
+.vscode/*
+.DS_Store
+# Compile results
 depend-myprog
+depend-client
+depend-server
 myprog
+client
+server
+/.metadata/
