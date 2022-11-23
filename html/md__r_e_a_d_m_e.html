@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TP-INF224: INF224 - Paradigmes de programmation, théorie et pratique</title>
+<title>TP-INF224 | Media Manager: INF224 - Paradigmes de programmation, théorie et pratique</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">TP-INF224<span id="projectnumber">&#160;1.0</span>
+   <div id="projectname">TP-INF224 | Media Manager<span id="projectnumber">&#160;1.0</span>
    </div>
   </td>
  </tr>
@@ -73,7 +73,12 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+Introduction</h1>
+<p >Le but de ces travaux pratiques est de créer l'ébauche du logiciel d'une set-top box multimédia permettant de jouer de la musique, des vidéos, des films, d'afficher des photos, etc. Ce logiciel sera realisé par étapes, en se limitant à la déclaration et l'implémentation de quelques classes et fonctionnalités typiques que l'on complétera progressivement. Noter qu'il est utile de lire le texte de chaque étape en entier avant de la traiter (en particulier les notes ou remarques qui donnent des indications).</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Les réponses aux questions posées</h1>
+<h2><a class="anchor" id="autotoc_md3"></a>
+5eme étape</h2>
 <p >Pour ce faire créer dans <a class="el" href="main_8cpp.html" title="Project&#39;s backend main file.">main.cpp</a> un tableau dont les éléments sont tantôt une photo tantôt une vidéo. Ecrire ensuite une boucle permettant d'afficher les attributs de tous les élements du tableau ou de les "jouer". Cette boucle doit traiter tous les objets dérivant de la classe de base de la même manière.</p>
 <ul>
 <li><p class="startli">Quelle est la propriété caractéristique de l'orienté objet qui permet de faire cela ?</p>
@@ -83,8 +88,18 @@ Les réponses aux questions posées</h1>
 <p class="startli">Au début, j'ai pensé que si on créait un array de <a class="el" href="class_media.html" title="Class used to represent a media. It is the super class of all types of medias.">Media</a>, cela marcherait. Cependant, il fallait créer un array de pointeurs pour que les differents objets (<a class="el" href="class_photo.html" title="Class used to represent a photo. It is a sub class of Media.">Photo</a>, <a class="el" href="class_video.html" title="Class used to represent a video. It is a sub class of Media.">Video</a> etc.) puissent être référencés.</p>
 </li>
 <li><p class="startli">Quel est le type des éléments du tableau : le tableau doit-il contenir des objets ou des pointeurs vers ces objets ? Pourquoi ? Comparer à Java.</p>
-<p class="startli">Le tableau doit contenir des pointeurs vers les objets car ce n'est pas possible de mélanger le polymorphisme et les arrays. </p>
+<p class="startli">Le tableau doit contenir des pointeurs vers les objets car ce n'est pas possible de mélanger le polymorphisme et les arrays.</p>
 </li>
+</ul>
+<h2><a class="anchor" id="autotoc_md4"></a>
+8eme étape</h2>
+<ul>
+<li>Le groupe ne doit pas détruire les objets quand il est détruit car un objet peut appartenir à plusieurs groupes (on verra ce point à la question suivante). On rappelle aussi que la liste d'objets doit en fait être une liste de pointeurs d'objets. Pourquoi ? Comparer à Java.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md5"></a>
+10eme étape</h2>
+<ul>
+<li>Les méthodes précédentes permettent d'assurer la cohérence de la base de données car quand on crée un objet on l'ajoute à la table adéquate. Par contre, ce ne sera pas le cas si on crée un objet directement avec new (il n'appartiendra à aucune table). Comment peut-on l'interdire, afin que seule la classe servant à manipuler les objets puisse en créer de nouveaux ? </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

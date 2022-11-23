@@ -1,8 +1,13 @@
-//
-// Client Java pour communiquer avec le Serveur C++ 
-// eric lecolinet - telecom paristech - 2015
-//
-
+/**
+ * @file Client.java
+ * @author Rafael Yuji Yokowo (rafael.yokowo@telecom-paris.fr)
+ * @brief Project's frontend main file 
+ * @version 1.0
+ * @date 2022-11-23
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 import java.io.*;
 import java.net.*;
 
@@ -15,6 +20,14 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import javax.swing.text.SimpleAttributeSet;
 
+/** @brief Class used to create the Client and establish the connection
+  * with the cpp server
+
+    It has, as parameters, the connection informations such as the host,
+    the port as well as the socket
+    @author Y., RAFAEL
+    @date November 2022
+    */
 public class Client
 {
   private static final long serialVersionUID = 1L;
@@ -25,8 +38,6 @@ public class Client
   private BufferedWriter output;
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  
-  ///
   /// Lit une requete depuis le Terminal, envoie cette requete au serveur,
   /// recupere sa reponse et l'affiche sur le Terminal.
   /// Noter que le programme bloque si le serveur ne repond pas.
@@ -48,12 +59,8 @@ public class Client
       System.err.println("Client: Couldn't connect to "+host+":"+port);
       System.exit(1);
     }
-    // System.out.println("Client connected to "+host+":"+port);
   }
-
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  ///
   /// Initialise la connexion.
   /// Renvoie une exception en cas d'erreur.
   ///
@@ -81,8 +88,6 @@ public class Client
   }
   
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  
-  ///
   /// Envoie une requete au server et retourne sa reponse.
   /// Noter que la methode bloque si le serveur ne repond pas.
   ///
@@ -109,65 +114,35 @@ public class Client
   }
 }
 
+/** @brief Class used to create the GUI used as the interface for the user
+
+    It has, as parameters, all the required javaswing elements 
+    @author Y., RAFAEL
+    @date November 2022
+    */
 class GUI implements ActionListener{
 	
+  private Client client;
+
 	private JFrame frame;
 	private JPanel panel;
-  private JToolBar tb;
-  private JTextField tf;
+  private JToolBar toolbar;
+  private JTextField textfield;
   private JTextArea textArea;
   private JTextPane textPane;
 	private JButton b1, b2, exitBtn, clear;
 
-	private JMenuBar mb;
+	private JMenuBar menubar;
 	private JMenu menu, listMenu;
 	private JMenuItem mediaMenu, groupMenu;
-
-  private Client client;
-	
-	private int count = 0;
-	private String commande;
 	
 	GUI(Client _client) {
 
     this.client = _client;
-			
-		panel = createPanel();
-    frame = createFrame();
+		this.panel = createPanel();
+    this.frame = createFrame();
     createMenuBar();
-
-    textArea = new JTextArea(20, 20);  
-    JScrollPane scrollableTextArea = new JScrollPane(textArea);
-    scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
-    scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
-    
-    panel.add(scrollableTextArea, BorderLayout.SOUTH); 
-
-    this.clear = new JButton("Clear");
-    this.clear.setActionCommand("CLEAR_BUTTON");
-    this.clear.addActionListener(this);
-
-    textPane = new JTextPane();
-    StyledDocument documentStyle = textPane.getStyledDocument();
-    SimpleAttributeSet centerAttribute = new SimpleAttributeSet();
-    StyleConstants.setAlignment(centerAttribute, StyleConstants.ALIGN_CENTER);
-    documentStyle.setParagraphAttributes(0, documentStyle.getLength(), centerAttribute, false);
-
-    Font font = new Font("Arial", Font.BOLD, 12);
-    textPane.setText("\nBienvenue à Media Manager 1.0 !\n" +
-                  "Pour voir les medias disponibles, veuillez acceder \n" +
-                  "à Media > List et selectioner l'option souhaitée.\n");
-    textPane.setEditable(false);
-    textPane.setFont(font);
-
-		frame.setJMenuBar(mb);
-    frame.add(panel, BorderLayout.CENTER);
-    frame.add(this.clear, BorderLayout.SOUTH);
-    frame.add(textPane, BorderLayout.NORTH);
-		
-		frame.pack();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+    createMainFrame();
 	}
 
   private void printText(String text) {
@@ -185,25 +160,20 @@ class GUI implements ActionListener{
     String response = "bar";
 
     if (command == "LIST_MEDIA") {
-		  String rep = this.client.send("LM-");
-      String[] arrOfStr = rep.split("@@", 100);
-      for (String name : arrOfStr){
-        this.textArea.append(name + '\n');
-      }
+		  response = this.client.send("LM-");
+      this.printText(response);
     }
     if (command == "LIST_GROUP") {
-		  String rep = this.client.send("LG-");
-      String[] arrOfStr = rep.split("@@", 100);
-      for (String name : arrOfStr){
-        this.textArea.append(name + '\n');
-      }
+		  response = this.client.send("LG-");
+      this.printText(response);
     }
     if (command == "BUTTON_1"){
-      request = this.tf.getText();
+      request = this.textfield.getText();
       response = this.client.send("P-"+request);
+      this.printText(response);
     }
     if (command == "BUTTON_2") {
-      request = this.tf.getText();
+      request = this.textfield.getText();
       response = this.client.send("S-"+request);
       this.printText(response);
     }
@@ -215,20 +185,20 @@ class GUI implements ActionListener{
 	}
 
 	private JFrame createFrame() {
-		frame = new JFrame();
-		frame.setTitle("Media Manager 1.0");
-		frame.setResizable(false);
-		frame.setSize(1600,1200);
+		this.frame = new JFrame();
+		this.frame.setTitle("Media Manager 1.0");
+		this.frame.setResizable(false);
+		this.frame.setSize(1600,1200);
 
-		return frame;
+		return this.frame;
 	}
 
 	private JPanel createPanel() {
-		JPanel panel = new JPanel();
-		panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 10, 30));
-		panel.setLayout(new GridLayout(1, 1));
-		panel.setFont(new Font("Arial", 0, 10));
-		return panel;
+		this.panel = new JPanel();
+		this.panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 10, 30));
+		this.panel.setLayout(new GridLayout(1, 1));
+		this.panel.setFont(new Font("Arial", 0, 10));
+		return this.panel;
 	}
 	
 	private void createMenuBar() {
@@ -245,17 +215,17 @@ class GUI implements ActionListener{
     this.b2.setActionCommand("BUTTON_2");
     this.b2.addActionListener(this);
 
-    this.tf = new JTextField();
+    this.textfield = new JTextField();
 
-    tb = new JToolBar();
-    tb.add(this.tf);
-    tb.add(this.b1);
-    tb.add(this.b2);
-    tb.add(this.exitBtn);
+    this.toolbar = new JToolBar();
+    this.toolbar.add(this.textfield);
+    this.toolbar.add(this.b1);
+    this.toolbar.add(this.b2);
+    this.toolbar.add(this.exitBtn);
 
-    this.mb = new JMenuBar();
-    this.mb.setOpaque(true);
-    this.mb.setBackground(Color.WHITE);
+    this.menubar = new JMenuBar();
+    this.menubar.setOpaque(true);
+    this.menubar.setBackground(Color.WHITE);
 		this.menu = new JMenu("Media");
     
     this.listMenu = new JMenu("List");
@@ -267,11 +237,46 @@ class GUI implements ActionListener{
     this.groupMenu.setActionCommand("LIST_GROUP");
     this.groupMenu.addActionListener(this);
 
-    this.listMenu.add(mediaMenu);
-    this.listMenu.add(groupMenu);
-    this.menu.add(listMenu);
+    this.listMenu.add(this.mediaMenu);
+    this.listMenu.add(this.groupMenu);
+    this.menu.add(this.listMenu);
 
-    this.mb.add(menu);
-    this.mb.add(tb);
+    this.menubar.add(this.menu);
+    this.menubar.add(this.toolbar);
 	}
+
+  void createMainFrame (){
+    this.textPane = new JTextPane();
+    StyledDocument documentStyle = this.textPane.getStyledDocument();
+    SimpleAttributeSet centerAttribute = new SimpleAttributeSet();
+    StyleConstants.setAlignment(centerAttribute, StyleConstants.ALIGN_CENTER);
+    documentStyle.setParagraphAttributes(0, documentStyle.getLength(), centerAttribute, false);
+
+    Font font = new Font("Arial", Font.BOLD, 12);
+    this.textPane.setText("\nBienvenue à Media Manager 1.0 !\n" +
+                  "Pour voir les medias disponibles, veuillez acceder \n" +
+                  "à Media > List et selectioner l'option souhaitée.\n");
+    this.textPane.setEditable(false);
+    this.textPane.setFont(font);
+
+    this.textArea = new JTextArea(20, 20);  
+    JScrollPane scrollableTextArea = new JScrollPane(this.textArea);
+    scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
+    scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+    
+    this.panel.add(scrollableTextArea, BorderLayout.SOUTH); 
+
+    this.clear = new JButton("Clear");
+    this.clear.setActionCommand("CLEAR_BUTTON");
+    this.clear.addActionListener(this);
+
+		this.frame.setJMenuBar(this.menubar);
+    this.frame.add(this.textPane, BorderLayout.NORTH);
+    this.frame.add(this.panel, BorderLayout.CENTER);
+    this.frame.add(this.clear, BorderLayout.SOUTH);
+		
+		this.frame.pack();
+    this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.setVisible(true);
+  }
 }

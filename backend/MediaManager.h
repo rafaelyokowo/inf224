@@ -48,14 +48,12 @@ public:
     PhotoType createPhoto(std::string name, std::string _path, int latitude, int longitude);
     VideoType createVideo(std::string name, std::string _path, int duration);
     MediaType findMedia(std::string name);
-    // void showMedia(std::string name);
     std::string showMedia(std::string name);
     std::string listMedia();
     std::string listGroup();
     std::string playMedia(std::string name);
     void deleteMedia(std::string name);
     void deleteGroup(std::string name);
-
 };
 
 void MediaManager::createGroup(std::string name) {
@@ -127,7 +125,7 @@ std::string MediaManager::playMedia(std::string name) {
     }
     else {
         media->play();
-        return "Playing media: " + name;
+        return name + "Played";
     }
 }
 
