@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['send_0',['send',['../class_socket.html#aadd260f15afadf0c31fa3dcf88d0ea49',1,'Socket::send()'],['../classfrontend_1_1_client.html#a4e69377f32f514d1093f951a831c1e9d',1,'frontend.Client.send()']]],
+  ['send_0',['send',['../class_socket.html#aadd260f15afadf0c31fa3dcf88d0ea49',1,'Socket::send()'],['../class_client.html#ab26831c395da92b5893066f9ce7963a4',1,'Client.send()']]],
   ['sendto_1',['sendTo',['../class_socket.html#aef5c4ba848f475f117b89bac531ac150',1,'Socket']]],
   ['server_5f_2',['server_',['../class_socket_cnx.html#ad46b42915ee50072a0307f0116403587',1,'SocketCnx']]],
   ['serversocket_3',['ServerSocket',['../class_server_socket.html',1,'ServerSocket'],['../class_socket.html#a11a8bb11feaafab939278a8285afa567',1,'Socket::ServerSocket()'],['../class_server_socket.html#a2b3098589541243241ca25495155186c',1,'ServerSocket::ServerSocket()']]],
