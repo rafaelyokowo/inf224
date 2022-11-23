@@ -9,19 +9,17 @@
 #
 # Nom du programme (doit correspondre au fichier qui contient main())
 #
-PATH = src/frontend/
-PROG = GUI
-CLIENT = Client
+PROG = Client
 
 #
 # Fichiers sources .java
 #
-SOURCES = ${PATH}Client.java
+SOURCES = Client.java
 
 #
 # Compilateur Java
 #
-JC = javac 
+JC = javac
 
 #
 # Options du compilateur Java
@@ -37,8 +35,7 @@ JFLAGS = -g
 all: classes
 
 run: all
-#java -classpath ${PWD}/src/ frontend.${PROG}
-	java -classpath ${PWD}/src/ frontend.${CLIENT}
+	java ${PROG}
 
 classes: $(SOURCES:.java=.class)
 
@@ -58,5 +55,3 @@ tar:
 
 .java.class:
 	$(JC) $(JFLAGS) $*.java
-
-

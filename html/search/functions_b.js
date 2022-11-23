@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['send_0',['send',['../class_socket.html#aadd260f15afadf0c31fa3dcf88d0ea49',1,'Socket::send()'],['../classfrontend_1_1_client.html#a4e69377f32f514d1093f951a831c1e9d',1,'frontend.Client.send()']]],
+  ['send_0',['send',['../class_socket.html#aadd260f15afadf0c31fa3dcf88d0ea49',1,'Socket::send()'],['../class_client.html#ab26831c395da92b5893066f9ce7963a4',1,'Client.send()']]],
   ['sendto_1',['sendTo',['../class_socket.html#aef5c4ba848f475f117b89bac531ac150',1,'Socket']]],
   ['serversocket_2',['ServerSocket',['../class_server_socket.html#a2b3098589541243241ca25495155186c',1,'ServerSocket']]],
   ['setarray_3',['setArray',['../class_film.html#ac7ef4dc25705d1e6f191ce907dc632a0',1,'Film']]],

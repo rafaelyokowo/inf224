@@ -1,4 +1,3 @@
-package frontend;
 //
 // Client Java pour communiquer avec le Serveur C++ 
 // eric lecolinet - telecom paristech - 2015

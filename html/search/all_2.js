@@ -4,7 +4,7 @@ var searchData=
   ['ccsocket_2ecpp_1',['ccsocket.cpp',['../ccsocket_8cpp.html',1,'']]],
   ['ccsocket_2eh_2',['ccsocket.h',['../ccsocket_8h.html',1,'']]],
   ['cleanup_3',['cleanup',['../class_socket.html#a744a91706b9510d266b7c07e31f3e028',1,'Socket']]],
-  ['client_4',['Client',['../classfrontend_1_1_client.html#a043ad19e4769569fe59cc4778c37dbe6',1,'frontend.Client.Client()'],['../classfrontend_1_1_client.html',1,'frontend.Client']]],
+  ['client_4',['Client',['../class_client.html',1,'Client'],['../class_client.html#a163113b9c3fda23dcdc750db9278afbe',1,'Client.Client()']]],
   ['client_2ejava_5',['Client.java',['../_client_8java.html',1,'']]],
   ['close_6',['close',['../class_socket.html#aef06605c6725958004116983f1a2051f',1,'Socket::close()'],['../class_server_socket.html#a3eac6d5571bb092622d328dbda2de2cf',1,'ServerSocket::close()']]],
   ['connect_7',['connect',['../class_socket.html#a772419bd74c4fe4987d190506a64ff87',1,'Socket']]],
