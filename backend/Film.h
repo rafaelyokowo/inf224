@@ -7,6 +7,12 @@
 #include <algorithm>
 #include <string>
 
+/** @brief Class used to represent a Film. It is a sub class of Video.
+
+    It has, as parameters, a film duration array as well as its size
+    @author Y., RAFAEL
+    @date November 2022
+    */
 class Film: public Video {
 private:
   int arraySize = 0;

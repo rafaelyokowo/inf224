@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 
-/** @brief Class used to represent a photo. It is a sub class of Media.
+/** @brief Class used to represent a Photo. It is a sub class of Media.
 
     It has, as parameters, the latitude and longitude of the photo
     @author Y., RAFAEL

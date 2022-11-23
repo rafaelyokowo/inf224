@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 
-/** @brief Class used to represent a video. It is a sub class of Media.
+/** @brief Class used to represent a Video. It is a sub class of Media.
 
     It has, as parameters, the duration of the video
     @author Y., RAFAEL

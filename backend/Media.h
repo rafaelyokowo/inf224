@@ -13,7 +13,7 @@
 #include <iostream>
 #include <string>
 
-/** @brief Class used to represent a media. It is the super class of 
+/** @brief Class used to represent a Media. It is the super class of 
  *  all types of medias.
 
     It has, as parameters, the file's type and path
