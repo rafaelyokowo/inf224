@@ -1,7 +1,13 @@
-//
-// main.cpp
-// Created on 21/10/2018
-//
+/**
+ * @file main.cpp
+ * @author Rafael Yuji Yokowo (rafael.yokowo@telecom-paris.fr)
+ * @brief Project's backend main file 
+ * @version 1.0
+ * @date 2022-11-23
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "stdio.h" 
 #include "unistd.h"
 #include "Media.h"
@@ -9,7 +15,7 @@
 #include "Photo.h"
 #include "Film.h"
 #include "Playlist.h"
-#include "GestionMedia.h"
+#include "MediaManager.h"
 #include "tcpserver.h"
 
 #include <memory>
@@ -29,8 +35,8 @@ const int PORT = 3331;
 
 int main(int argc, const char* argv[])
 {
-	GestionMedia * media = new GestionMedia();
-	GestionMedia * group = new GestionMedia();
+	MediaManager * media = new MediaManager();
+	MediaManager * group = new MediaManager();
 
 	group->createGroup("Group-A");
 	group->createGroup("Group-B");
@@ -49,7 +55,7 @@ int main(int argc, const char* argv[])
 
 	// the responses that the server sends back to the client
 	if (req == "P"){
-		media->playMedia(request.substr(2));
+		response = media->playMedia(request.substr(2));
 	}
 	if (req == "S"){
 		response = media->showMedia(request.substr(2));

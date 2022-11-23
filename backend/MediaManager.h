@@ -1,5 +1,15 @@
-#ifndef GestionMedia_h
-#define GestionMedia_h
+/**
+ * @file MediaManager.h
+ * @author Rafael Yuji Yokowo (rafael.yokowo@telecom-paris.fr)
+ * @brief Media Management
+ * @version 1.0
+ * @date 2022-11-23
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+#ifndef MediaManager_h
+#define MediaManager_h
 
 #include "Film.h"
 #include "Photo.h"
@@ -19,13 +29,20 @@ typedef std::shared_ptr<Media> MediaType;
 typedef std::shared_ptr<Photo> PhotoType;
 typedef std::shared_ptr<Video> VideoType;
 
-class GestionMedia {
+/** @brief Class used to manage all medias. It is responsible for creating,
+ * listing, showing and playing the corresponding medias and their informations
+
+    It has, as parameters, a Media or a Group list
+    @author Y., RAFAEL
+    @date November 2022
+    */
+class MediaManager {
 private:
     Multimedia multimedia;
     Group group;
 public:
-    GestionMedia() {};
-    ~GestionMedia() {};
+    MediaManager() {};
+    ~MediaManager() {};
     void createGroup(std::string name);
     FilmType createFilm(std::string name);
     PhotoType createPhoto(std::string name, std::string _path, int latitude, int longitude);
@@ -35,35 +52,35 @@ public:
     std::string showMedia(std::string name);
     std::string listMedia();
     std::string listGroup();
-    void playMedia(std::string name);
+    std::string playMedia(std::string name);
     void deleteMedia(std::string name);
     void deleteGroup(std::string name);
 
 };
 
-void GestionMedia::createGroup(std::string name) {
+void MediaManager::createGroup(std::string name) {
    group[name] = std::make_shared<Playlist>();
 }
 
-FilmType GestionMedia::createFilm(std::string name) {
+FilmType MediaManager::createFilm(std::string name) {
     multimedia[name] = std::make_shared<Film>();
     multimedia.find(name)->second->setType("Film");
     return std::dynamic_pointer_cast<Film>(multimedia[name]);
 }
 
-PhotoType GestionMedia::createPhoto(std::string name, std::string _path, int latitude, int longitude) {
+PhotoType MediaManager::createPhoto(std::string name, std::string _path, int latitude, int longitude) {
     multimedia[name] = std::make_shared<Photo>(_path, latitude, longitude);
     multimedia.find(name)->second->setType("Photo");
     return std::dynamic_pointer_cast<Photo>(multimedia[name]);
 }
 
-VideoType GestionMedia::createVideo(std::string name, std::string _path, int duration) {
+VideoType MediaManager::createVideo(std::string name, std::string _path, int duration) {
     multimedia[name] = std::make_shared<Video>(_path, duration);
     multimedia.find(name)->second->setType("Video");
     return std::dynamic_pointer_cast<Video>(multimedia[name]);
 }
 
-MediaType GestionMedia::findMedia(std::string name) {
+MediaType MediaManager::findMedia(std::string name) {
     if (multimedia.empty() ==  true) {
         return nullptr;
     }
@@ -75,7 +92,7 @@ MediaType GestionMedia::findMedia(std::string name) {
     }
 }
 
-std::string GestionMedia::showMedia(std::string name) {
+std::string MediaManager::showMedia(std::string name) {
     MediaType media = findMedia(name);
     if (media == nullptr) {
         return "No media named: '" + name +
@@ -86,7 +103,7 @@ std::string GestionMedia::showMedia(std::string name) {
     }
 }
 
-std::string GestionMedia::listMedia() {
+std::string MediaManager::listMedia() {
     std::string list;
     for (auto const& x: this->multimedia){
         list += x.first + "@@";
@@ -94,7 +111,7 @@ std::string GestionMedia::listMedia() {
     return list;
 }
 
-std::string GestionMedia::listGroup() {
+std::string MediaManager::listGroup() {
     std::string list;
     for (auto const& x: this->group){
         list += x.first + "@@";
@@ -102,18 +119,19 @@ std::string GestionMedia::listGroup() {
     return list;
 }
     
-void GestionMedia::playMedia(std::string name) {
+std::string MediaManager::playMedia(std::string name) {
     MediaType media = findMedia(name);
     if (media == nullptr) {
-        std::cout << "No media named: '" << name 
-                    << "' was found/can be played." << std::endl;
+        return "No media named: '" + name +
+                "' was found/can be played.";
     }
     else {
         media->play();
+        return "Playing media: " + name;
     }
 }
 
-void GestionMedia::deleteMedia(std::string name) {
+void MediaManager::deleteMedia(std::string name) {
     if (multimedia.empty() ==  true) {
         std::cout << "Empty list" << std::endl;
     }
@@ -123,7 +141,7 @@ void GestionMedia::deleteMedia(std::string name) {
     }
 }
 
-void GestionMedia::deleteGroup(std::string name) {
+void MediaManager::deleteGroup(std::string name) {
     auto it = group.find(name);
     group.erase(it);
 }

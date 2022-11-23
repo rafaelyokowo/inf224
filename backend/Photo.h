@@ -1,3 +1,13 @@
+/**
+ * @file Photo.h
+ * @author Rafael Yuji Yokowo (rafael.yokowo@telecom-paris.fr)
+ * @brief Class Photo
+ * @version 1.0
+ * @date 2022-11-23
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef Photo_h
 #define Photo_h
 
@@ -6,6 +16,12 @@
 #include <iostream>
 #include <string>
 
+/** @brief Class used to represent a photo. It is a sub class of Media.
+
+    It has, as parameters, the latitude and longitude of the photo
+    @author Y., RAFAEL
+    @date November 2022
+    */
 class Photo: public Media {
 private:
 	int latitude = 0;

@@ -155,7 +155,7 @@ class GUI implements ActionListener{
     documentStyle.setParagraphAttributes(0, documentStyle.getLength(), centerAttribute, false);
 
     Font font = new Font("Arial", Font.BOLD, 12);
-    textPane.setText("\nBienvenue à L'Interface Media 3.0 !\n" +
+    textPane.setText("\nBienvenue à Media Manager 1.0 !\n" +
                   "Pour voir les medias disponibles, veuillez acceder \n" +
                   "à Media > List et selectioner l'option souhaitée.\n");
     textPane.setEditable(false);
@@ -217,7 +217,7 @@ class GUI implements ActionListener{
 
 	private JFrame createFrame() {
 		frame = new JFrame();
-		frame.setTitle("TP INF224");
+		frame.setTitle("Media Manager 1.0");
 		frame.setResizable(false);
 		frame.setSize(1600,1200);
 

@@ -16,7 +16,7 @@ CLIENT = Client
 #
 # Fichiers sources .java
 #
-SOURCES = ${PATH}Client.java ${PATH}GUI.java
+SOURCES = ${PATH}Client.java
 
 #
 # Compilateur Java
