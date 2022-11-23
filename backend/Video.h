@@ -1,3 +1,13 @@
+/**
+ * @file Video.h
+ * @author Rafael Yuji Yokowo (rafael.yokowo@telecom-paris.fr)
+ * @brief Class Video
+ * @version 1.0
+ * @date 2022-11-23
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef Video_h
 #define Video_h
 
@@ -6,6 +16,12 @@
 #include <iostream>
 #include <string>
 
+/** @brief Class used to represent a video. It is a sub class of Media.
+
+    It has, as parameters, the duration of the video
+    @author Y., RAFAEL
+    @date November 2022
+    */
 class Video: public Media {
 private:
 	int duration = 0;
