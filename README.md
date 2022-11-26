@@ -54,4 +54,18 @@ Pour ce faire créer dans main.cpp un tableau dont les éléments sont tantôt u
 
 ### Screenshots
 
+- L'interface
+
 ![plot](./interface.png)
+
+- La liste de media
+
+![plot](./list.png)
+
+- Afficher des medias
+
+![plot](./show.png)
+
+- Jouer des medias
+
+![plot](./play.png)
