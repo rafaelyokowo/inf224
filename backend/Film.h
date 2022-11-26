@@ -1,3 +1,13 @@
+/**
+ * @file Film.h
+ * @author Rafael Yuji Yokowo (rafael.yokowo@telecom-paris.fr)
+ * @brief Class Film
+ * @version 1.0
+ * @date 2022-11-26
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef Film_h
 #define Film_h
 

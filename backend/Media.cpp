@@ -1,3 +1,13 @@
+/**
+ * @file Media.cpp
+ * @author Rafael Yuji Yokowo (rafael.yokowo@telecom-paris.fr)
+ * @brief Class Media implementation file
+ * @version 1.0
+ * @date 2022-11-26
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "Media.h"
 
 #include <iostream>

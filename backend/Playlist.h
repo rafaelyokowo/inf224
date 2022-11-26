@@ -1,3 +1,13 @@
+/**
+ * @file Playlist.h
+ * @author Rafael Yuji Yokowo (rafael.yokowo@telecom-paris.fr)
+ * @brief Class Playlist
+ * @version 1.0
+ * @date 2022-11-26
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef Playlist_h
 #define Playlist_h
 
