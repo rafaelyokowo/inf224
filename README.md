@@ -51,3 +51,7 @@ Pour ce faire créer dans main.cpp un tableau dont les éléments sont tantôt u
 - Les méthodes précédentes permettent d'assurer la cohérence de la base de données car quand on crée un objet on l'ajoute à la table adéquate. Par contre, ce ne sera pas le cas si on crée un objet directement avec new (il n'appartiendra à aucune table). Comment peut-on l'interdire, afin que seule la classe servant à manipuler les objets puisse en créer de nouveaux ?
 
     Une manière de restreindre la création d'objets d'une classe est de rendre son constructeur privé, permettant son accès à une autre classe en utilisant la tag _friend_.
+
+### Screenshots
+
+![plot](./interface.png)
