@@ -74,11 +74,23 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
 Introduction</h1>
-<p >Le but de ces travaux pratiques est de créer l'ébauche du logiciel d'une set-top box multimédia permettant de jouer de la musique, des vidéos, des films, d'afficher des photos, etc. Ce logiciel sera realisé par étapes, en se limitant à la déclaration et l'implémentation de quelques classes et fonctionnalités typiques que l'on complétera progressivement. Noter qu'il est utile de lire le texte de chaque étape en entier avant de la traiter (en particulier les notes ou remarques qui donnent des indications).</p>
+<p >Le but de ce projet est de créer l'ébauche du logiciel d'une set-top box multimédia permettant de jouer de la musique, des vidéos, des films, d'afficher des photos, etc. Ce logiciel sera realisé par étapes, en se limitant à la déclaration et l'implémentation de quelques classes et fonctionnalités typiques que l'on complétera progressivement.</p>
 <h1><a class="anchor" id="autotoc_md2"></a>
+Configuration</h1>
+<p >Ce projet a été divisé en deux parties principales: backend et frontend. Le premier vise à créer toutes les classes qui sont relacionées aux medias ainsi que la structure du serveur auquel le client se communiquera. Ensuite, le deuxieme est responsable pour l'interface du client dans laquelle un utilisateur peut lister les medias disponibles, les jouer et voir leurs informations.</p>
+<p >Afin de le mettre en fonctionnement, il faut suivre la consigne suivante:</p>
+<ul>
+<li>À partir du dossier <em>inf224</em>, ouvrez deux onglets du terminal;</li>
+<li><p class="startli">Ensuite, faites:</p>
+<p class="startli"><em>cd backend &amp;&amp; make</em> dans le premier onglet</p>
+<p class="startli"><em>cd frontend &amp;&amp; make</em> dans le deuxieme onglet</p>
+</li>
+<li>Finalement, faites la commande <em>make run</em> dans l'onglet du backend et après dans l'onglet du frontend (il faut suivre cette ordre).</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Les réponses aux questions posées</h1>
-<h2><a class="anchor" id="autotoc_md3"></a>
-5eme étape</h2>
+<h2><a class="anchor" id="autotoc_md4"></a>
+5eme étape (C++)</h2>
 <p >Pour ce faire créer dans <a class="el" href="main_8cpp.html" title="Project&#39;s backend main file.">main.cpp</a> un tableau dont les éléments sont tantôt une photo tantôt une vidéo. Ecrire ensuite une boucle permettant d'afficher les attributs de tous les élements du tableau ou de les "jouer". Cette boucle doit traiter tous les objets dérivant de la classe de base de la même manière.</p>
 <ul>
 <li><p class="startli">Quelle est la propriété caractéristique de l'orienté objet qui permet de faire cela ?</p>
@@ -91,15 +103,20 @@ Les réponses aux questions posées</h1>
 <p class="startli">Le tableau doit contenir des pointeurs vers les objets car ce n'est pas possible de mélanger le polymorphisme et les arrays.</p>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
-8eme étape</h2>
-<ul>
-<li>Le groupe ne doit pas détruire les objets quand il est détruit car un objet peut appartenir à plusieurs groupes (on verra ce point à la question suivante). On rappelle aussi que la liste d'objets doit en fait être une liste de pointeurs d'objets. Pourquoi ? Comparer à Java.</li>
-</ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
-10eme étape</h2>
+8eme étape (C++)</h2>
 <ul>
-<li>Les méthodes précédentes permettent d'assurer la cohérence de la base de données car quand on crée un objet on l'ajoute à la table adéquate. Par contre, ce ne sera pas le cas si on crée un objet directement avec new (il n'appartiendra à aucune table). Comment peut-on l'interdire, afin que seule la classe servant à manipuler les objets puisse en créer de nouveaux ? </li>
+<li><p class="startli">Le groupe ne doit pas détruire les objets quand il est détruit car un objet peut appartenir à plusieurs groupes (on verra ce point à la question suivante). On rappelle aussi que la liste d'objets doit en fait être une liste de pointeurs d'objets. Pourquoi ? Comparer à Java.</p>
+<p class="startli">Dans le cas où la liste est faite avec des pointeurs, l'appel à un destructeur fait que les pointés ne soient pas détruits, seulement les pointeurs. De sorte qu'on peut conserver des objets (représentant des pointés) qui peuvent appartenir à d'autres groupes.</p>
+<p class="startli">En java, les objets non référencés sont automatiquement détruits par le ramasse-miettes. Donc, tant qu'il existe une référence à l'objet dans le programme, il ne sera pas détruit par erreur.</p>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md6"></a>
+10eme étape (C++)</h2>
+<ul>
+<li><p class="startli">Les méthodes précédentes permettent d'assurer la cohérence de la base de données car quand on crée un objet on l'ajoute à la table adéquate. Par contre, ce ne sera pas le cas si on crée un objet directement avec new (il n'appartiendra à aucune table). Comment peut-on l'interdire, afin que seule la classe servant à manipuler les objets puisse en créer de nouveaux ?</p>
+<p class="startli">Une manière de restreindre la création d'objets d'une classe est de rendre son constructeur privé, permettant son accès à une autre classe en utilisant la tag <em>friend</em>. </p>
+</li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
