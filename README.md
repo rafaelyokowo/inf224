@@ -58,7 +58,7 @@ Pour ce faire créer dans main.cpp un tableau dont les éléments sont tantôt u
 
 ![plot](./interface.png)
 
-- La liste de media
+- La liste des medias
 
 ![plot](./list.png)
 
